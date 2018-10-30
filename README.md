@@ -1,2 +1,9 @@
 # Building-Info
 Projekt wykonywany w ramach laboratorium z przedmiotu Inżynieria Oprogramowania
+Dla administratorów budynków, którzy pragną optymalizować koszty zarządzania budynkami nasza aplikacja Building Info umożliwi pozyskanie informacji o parametrach budynku na poziomie pomieszczeń, kondygnacji oraz całych budynków. Aplikacja będzie dostępna poprzez GUI, a także
+jako zdalne API dzięki czemu można ją zintegrować z istniejącymi narzędziami.
+
+- [ ] Jako zarządca budynku mogę sprawdzić łączną powierzchnie budynku, poziomu lub pomieszczenia, aby móc prowadzić wyliczenia bazujące na powierzchni
+- [ ] Jako zarządca budynku mogę sprawdzić łączną kubaturę pomieszczeń w budynku, na poziomu czy też pobrać kubaturę pomieszczenia, aby móc prowadzić wyliczenia bazujące na kubaturze pomieszczeń
+- [ ] Jako zarządca budynku mogę obliczyć moc oświetlenia w przeliczeniu na jednostkę powierzchni dla budynku, poziomu, pomieszczenia 
+- [ ] Jako zarządca budynku mogę obliczyć zużycie energii na ogrzewanie w przeliczeniu na jednostkę objętości dla budynku, poziomu, pomieszczenia 
