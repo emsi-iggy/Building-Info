@@ -7,3 +7,5 @@ jako zdalne API dzięki czemu można ją zintegrować z istniejącymi narzędzia
 - [ ] Jako zarządca budynku mogę sprawdzić łączną kubaturę pomieszczeń w budynku, na poziomu czy też pobrać kubaturę pomieszczenia, aby móc prowadzić wyliczenia bazujące na kubaturze pomieszczeń
 - [ ] Jako zarządca budynku mogę obliczyć moc oświetlenia w przeliczeniu na jednostkę powierzchni dla budynku, poziomu, pomieszczenia 
 - [ ] Jako zarządca budynku mogę obliczyć zużycie energii na ogrzewanie w przeliczeniu na jednostkę objętości dla budynku, poziomu, pomieszczenia 
+
+# [Zasady punktowania sprintów](https://docs.google.com/spreadsheets/d/e/2PACX-1vSxEKEBzcopOqfu9OHFwQkD2oDQlztfqAW0Tf_IXjElZQyKDUrzl4-oxI78NQEHZaLh1Vorl2RSyEf3/pubhtml)
