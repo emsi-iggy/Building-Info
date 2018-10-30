@@ -10,4 +10,4 @@ jako zdalne API dzięki czemu można ją zintegrować z istniejącymi narzędzia
 
 # [Zasady punktowania sprintów](https://docs.google.com/spreadsheets/d/e/2PACX-1vSxEKEBzcopOqfu9OHFwQkD2oDQlztfqAW0Tf_IXjElZQyKDUrzl4-oxI78NQEHZaLh1Vorl2RSyEf3/pubhtml)
 
-![Status builda] (https://travis-ci.org/emsi-iggy/Building-Info.svg?branch=master)
+![Status builda](https://travis-ci.org/emsi-iggy/Building-Info.svg?branch=master)
