@@ -24,6 +24,18 @@ public class Pomieszczenie extends Lokalizacja{
         this.light = light;
     }
 
+    @Override
+    public String toString() {
+        return "Pomieszczenie{" +
+                "id=" + getId() +
+                ", nazwa='" + getNazwa() + '\'' +
+                ", area=" + area +
+                ", cube=" + cube +
+                ", heating=" + heating +
+                ", light=" + light +
+                '}';
+    }
+
     public double getCube() {
         return cube;
     }
