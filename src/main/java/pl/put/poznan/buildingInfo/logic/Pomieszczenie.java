@@ -1,16 +1,15 @@
 package pl.put.poznan.buildingInfo.logic;
 
-public class Pomieszczenie {
-    private int id; //dodana zmienna
-    private String nazwa; //dodana zmienna
+import pl.put.poznan.buildingInfo.logic.Lokalizacja;
+
+public class Pomieszczenie extends Lokalizacja{
     private double area;
     private double cube;
     private double heating;
     private double light;
 
     public Pomieszczenie() {
-        this.id = 0; //wyzerowanie nowej zmiennej
-        this.nazwa = ""; //to samo co wyzej
+        super();
         this.area = 0.0;
         this.cube = 0.0;
         this.heating = 0.0;
@@ -18,40 +17,11 @@ public class Pomieszczenie {
     }
 
     public Pomieszczenie(int id, String nazwa, double area, double cube, double heating, double light) {
-        this.id = id;       //tu tez
-        this.nazwa = nazwa; //i tu
+        super(id, nazwa);
         this.area = area;
         this.cube = cube;
         this.heating = heating;
         this.light = light;
-    }
-
-    @Override
-    public String toString() {
-        return "Pomieszczenie{" +
-                "id=" + id +
-                ", nazwa='" + nazwa + '\'' +
-                ", area=" + area +
-                ", cube=" + cube +
-                ", heating=" + heating +
-                ", light=" + light +
-                '}'; //czemu tu jest apostrof a nie cudzyslow? hmmm... doesn't matter
-    }
-
-    public int getId() { //settery i gettery do Id i Nazwy dodane
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNazwa() {
-        return nazwa;
-    }
-
-    public void setNazwa(String nazwa) {
-        this.nazwa = nazwa;
     }
 
     public double getCube() {
