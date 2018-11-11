@@ -1,9 +1,11 @@
 package pl.put.poznan.buildingInfo.logic;
 
 
+import java.util.*;
+
 public class Budynek extends Lokalizacja{
 
-    public ArrayList <Poziom> listaPoziomow ;
+    private ArrayList <Poziom> listaPoziomow ;
 
 
     public Budynek() {
@@ -27,8 +29,8 @@ public class Budynek extends Lokalizacja{
                 '}';
     }
 
-    public int getListapoziomow() {
-        return ArrayList <Poziom> listaPoziomow;
+    public ArrayList<Poziom> getListaPoziomow() {
+        return listaPoziomow;
     }
 
     public void setListaPoziomow(ArrayList <Poziom> listaPoziomow) {
