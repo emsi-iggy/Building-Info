@@ -42,12 +42,12 @@ public class buildingInfoController {
         return "Nazwe tej metody trza zmienic ;)";
     }
 
-    @RequestMapping(value="/powierzchnia/{indeksBudynku}/{indeksPoziomu}/{indeksPomieszczenia}",method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
+    @RequestMapping(value="/{indeksBudynku}/{indeksPoziomu}/{indeksPomieszczenia}",method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
     public String wyswietlKonkretnePomieszczenie(@PathVariable("text") String text, @PathVariable("indeksBudynku") int indeksBudynku,
                                                  @PathVariable("indeksPoziomu") int indeksPoziomu,@PathVariable("indeksPomieszczenia") int indeksPomieszczenia) {
         //funkcja zwracajaca łączną powierzchnię budynku, poziomu lub pomieszczenia
         //to do
-        return "pozostale funkcje beda analogicznie";
+        return "jakis tutaj komentarz";
     }
 
 
