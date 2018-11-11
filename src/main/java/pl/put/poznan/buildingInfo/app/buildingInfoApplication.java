@@ -8,7 +8,8 @@ import java.util.*;
 @SpringBootApplication(scanBasePackages = {"pl.put.poznan.buildingInfo.rest"})
 
 public class buildingInfoApplication {
-    //public static List <Budynek> listaBudynkow;
+    public static List <Budynek> listaBudynkow;
+
     public static void main(String[] args) {
         //listaBudynkow = new ArrayList<>();
 
