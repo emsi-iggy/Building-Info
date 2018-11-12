@@ -52,4 +52,8 @@ public class Poziom extends Lokalizacja {
 
         return light;
     }
+
+    public double getLightPerSquareMeter() {
+        return getLight() / getArea();
+    }
 }
