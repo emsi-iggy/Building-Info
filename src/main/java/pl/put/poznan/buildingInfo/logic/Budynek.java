@@ -67,7 +67,20 @@ public class Budynek extends Lokalizacja{
         return light;
     }
 
+    public double getHeating() {
+        double heating = 0;
+
+        for (Poziom poziom : listaPoziomow) {
+            heating += poziom.getHeating();
+        }
+        return heating;
+    }
+
     public double getLightPerSquareMeter() {
         return getLight() / getArea();
+    }
+
+    public double getHeatingPerCubicMeter() {
+        return getHeating() / getCube();
     }
 }
