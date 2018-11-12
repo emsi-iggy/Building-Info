@@ -37,4 +37,14 @@ public class Budynek extends Lokalizacja{
         this.listaPoziomow = listaPoziomow;
     }
 
+    public double getArea() {
+        double area = 0;
+
+        for(Poziom poziom : listaPoziomow) {
+            area += poziom.getArea();
+        }
+
+        return area;
+    }
+
 }
