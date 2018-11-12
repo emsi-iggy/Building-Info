@@ -63,7 +63,21 @@ public class Poziom extends Lokalizacja {
         return light;
     }
 
+    public double getHeating() {
+        double heating = 0;
+
+        for(Pomieszczenie pomieszczenie : listaPomieszczen) {
+            heating += pomieszczenie.getHeating();
+        }
+
+        return heating;
+    }
+
     public double getLightPerSquareMeter() {
         return getLight() / getArea();
+    }
+
+    public double getHeatingPerCubicMeter() {
+        return getHeating() / getCube();
     }
 }
