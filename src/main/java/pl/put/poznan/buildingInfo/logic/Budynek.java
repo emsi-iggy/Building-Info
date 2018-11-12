@@ -57,4 +57,17 @@ public class Budynek extends Lokalizacja{
         return cube;
     }
 
+    public double getLight() {
+        double light = 0;
+
+        for(Poziom poziom : listaPoziomow) {
+            light += poziom.getLight();
+        }
+
+        return light;
+    }
+
+    public double getLightPerSquareMeter() {
+        return getLight() / getArea();
+    }
 }
