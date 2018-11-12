@@ -32,4 +32,14 @@ public class Poziom extends Lokalizacja {
     public void setListaPomieszczen(ArrayList <Pomieszczenie> listaPomieszczen) {
         this.listaPomieszczen = listaPomieszczen;
     }
+
+    public double getArea() {
+        double area = 0;
+
+        for(Pomieszczenie pomieszczenie : listaPomieszczen) {
+            area += pomieszczenie.getArea();
+        }
+
+        return area;
+    }
 }
