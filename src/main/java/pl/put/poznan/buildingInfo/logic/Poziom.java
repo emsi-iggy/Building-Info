@@ -43,6 +43,16 @@ public class Poziom extends Lokalizacja {
         return area;
     }
 
+    public double getCube() {
+        double cube = 0;
+
+        for(Pomieszczenie pomieszczenie : listaPomieszczen) {
+            cube += pomieszczenie.getCube();
+        }
+
+        return cube;
+    }
+
     public double getLight() {
         double light = 0;
 

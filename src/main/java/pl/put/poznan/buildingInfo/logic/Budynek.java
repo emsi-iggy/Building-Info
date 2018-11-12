@@ -47,4 +47,14 @@ public class Budynek extends Lokalizacja{
         return area;
     }
 
+    public double getCube() {
+        double cube = 0;
+
+        for(Poziom poziom : listaPoziomow) {
+            cube += poziom.getCube();
+        }
+
+        return cube;
+    }
+
 }
