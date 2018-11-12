@@ -11,42 +11,105 @@ import pl.put.poznan.buildingInfo.app.buildingInfoApplication;
 import pl.put.poznan.buildingInfo.logic.*;
 import java.util.ArrayList;
 
-@RestController
-@RequestMapping("/{text}") //wpisz w przegladarke: localhost:8080/wyswietl
+import static org.junit.Assert.*;
+
+@RestController //wpisz w przegladarke: localhost:8080/wyswietl
 public class buildingInfoController {
 
     private static final Logger logger = LoggerFactory.getLogger(pl.put.poznan.buildingInfo.rest.buildingInfoController.class);
 
-    @RequestMapping(method= RequestMethod.POST, produces = "application/json", consumes = "application/json") // (wpisz w przegladarke: localhost:8080/cokolwiek/pomieszczenie)
-    public String wyswietlWszystkiePomieszczenia(@PathVariable("text") String text,
-                                                 @RequestBody(required=false) JSONObject obiekt){
-        if(text.equals("dodaj")) {
-            if(obiekt.containsKey("Pomieszczenie")) {
-                System.out.println(obiekt.toJSONString());
-                //chcemy dodac pomieszczenie
-                Object o = (String) obiekt.get("Pomieszczenie").toString().replaceAll("[{}]","");;
-                String [] czesci =  o.toString().split("[,=]");
+    @RequestMapping(value="/dodaj",method= RequestMethod.POST, produces = "application/json", consumes = "application/json") // (wpisz w przegladarke: localhost:8080/cokolwiek/pomieszczenie)
+    public String wyswietlWszystkiePomieszczenia(@RequestBody(required=false) JSONObject obiekt){
+        if(obiekt.containsKey("Pomieszczenie")) {
+            System.out.println(obiekt.toJSONString());
+            //chcemy dodac pomieszczenie
+            Object o = (String) obiekt.get("Pomieszczenie").toString().replaceAll("[{}]","");;
+            String [] czesci =  o.toString().split("[,=]");
 
-            }
-            else if(obiekt.containsKey("Poziom")) {
-                //chcemy dodac poziom
-            }
-            else if(obiekt.containsKey("Budynek")){
-                //chcemy dodac budynek
-            }
         }
-        else if(text.equals("wyswietl"))
-        {
-            //wyswietli wszywstkie budynki (wraz z poziomami i pomieszczeniami)
+        else if(obiekt.containsKey("Poziom")) {
+            //chcemy dodac poziom
         }
-        return "Nazwe tej metody trza zmienic ;)";
+        else if(obiekt.containsKey("Budynek")){
+            //chcemy dodac budynek
+        }
+
+        return "";
     }
 
-    @RequestMapping(value="/{indeksBudynku}/{indeksPoziomu}/{indeksPomieszczenia}",method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
-    public String wyswietlKonkretnePomieszczenie(@PathVariable("text") String text, @PathVariable("indeksBudynku") int indeksBudynku,
-                                                 @PathVariable("indeksPoziomu") int indeksPoziomu,@PathVariable("indeksPomieszczenia") int indeksPomieszczenia) {
+    @RequestMapping(value="/{wyswietl}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    public String wyswietlWszystko(@PathVariable("wyswietl") String wyswietl) {
+        if(wyswietl.equals("powierzchnia")) {
+
+        }
+
+        else if(wyswietl.equals("kubatura")) {
+
+        }
+        else if(wyswietl.equals("moc")) { //moc oswietlenia
+
+        }
+        else { //zuzycie energii
+
+        }
+        return "jakis tutaj komentarz";
+    }
+
+    @RequestMapping(value="/{wyswietl}/{indeksBudynku}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    public String wyswietlKonkretnyBudynek(@PathVariable("wyswietl") String wyswietl,@PathVariable("indeksBudynku") int indeksBudynku) {
+        if(wyswietl.equals("powierzchnia")) {
+
+        }
+
+        else if(wyswietl.equals("kubatura")) {
+
+        }
+        else if(wyswietl.equals("moc")) { //moc oswietlenia
+
+        }
+        else { //zuzycie energii
+
+        }
+        return "jakis tutaj komentarz";
+    }
+
+    @RequestMapping(value="/{wyswietl}/{indeksBudynku}/{indeksPoziomu}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    public String wyswietlKonkretnnyPoziom(@PathVariable("wyswietl") String wyswietl, @PathVariable("indeksBudynku") int indeksBudynku,
+                                           @PathVariable("indeksPoziomu") int indeksPoziomu) {
+        if(wyswietl.equals("powierzchnia")) {
+
+        }
+
+        else if(wyswietl.equals("kubatura")) {
+
+        }
+        else if(wyswietl.equals("moc")) { //moc oswietlenia
+
+        }
+        else { //zuzycie energii
+
+        }
+        return "jakis tutaj komentarz";
+    }
+
+    @RequestMapping(value="/{wyswietl}/{indeksBudynku}/{indeksPoziomu}/{indeksPomieszczenia}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    public String wyswietlKonkretnePomieszczenie(@PathVariable("wyswietl") String wyswietl,
+                                                 @PathVariable("indeksBudynku") int indeksBudynku, @PathVariable("indeksPoziomu") int indeksPoziomu,
+                                           @PathVariable("indeksPomieszczenia") int indeksPomieszczenia) {
         //funkcja zwracajaca łączną powierzchnię budynku, poziomu lub pomieszczenia
-        //to do
+        if(wyswietl.equals("powierzchnia")) {
+
+        }
+
+        else if(wyswietl.equals("kubatura")) {
+
+        }
+        else if(wyswietl.equals("moc")) { //moc oswietlenia
+
+        }
+        else { //zuzycie energii
+
+        }
         return "jakis tutaj komentarz";
     }
 
