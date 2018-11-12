@@ -42,4 +42,18 @@ public class Poziom extends Lokalizacja {
 
         return area;
     }
+
+    public double getLight() {
+        double light = 0;
+
+        for(Pomieszczenie pomieszczenie : listaPomieszczen) {
+            light += pomieszczenie.getLight();
+        }
+
+        return light;
+    }
+
+    public double getLightPerSquareMeter() {
+        return getLight() / getArea();
+    }
 }
