@@ -66,8 +66,8 @@ public class buildingInfoController {
         else if(wyswietl.equals("moc")) { //moc oswietlenia
             return "Moc oświetlenia budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getLight();
         }
-        else { //zuzycie energii
-
+        else if(wyswietl.equals("energia")) {//zuzycie energii
+            return "Zużycie energii na ogrzewanie budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getHeating();
         }
         return "Podano niepoprawną ścieżkę";
     }
@@ -91,8 +91,10 @@ public class buildingInfoController {
                     + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
                     + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getLight();
         }
-        else { //zuzycie energii
-
+        else if(wyswietl.equals("energia")){ //zuzycie energii
+            return "Zużycie energii na ogrzewanie poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getHeating();
         }
         return "Podano niepoprawną ścieżkę";
     }
@@ -121,8 +123,11 @@ public class buildingInfoController {
                     + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
                     + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getLight();
         }
-        else { //zuzycie energii
-
+        else if(wyswietl.equals("energia")){ //zuzycie energii
+            return "Zużycie energii na ogrzewanie pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
+                    + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getHeating();
         }
         return "Podano niepoprawną ścieżkę";
     }
