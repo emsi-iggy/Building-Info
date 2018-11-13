@@ -2,6 +2,9 @@ package pl.put.poznan.buildingInfo.logic;
 
 import java.util.ArrayList;
 
+/**
+ * Class Poziom represents class Lokalizacja with additional attributes such as ArrayList type Pomieszczenie - listaPomieszczen
+ */
 public class Poziom extends Lokalizacja {
 
     private ArrayList <Pomieszczenie> listaPomieszczen;
@@ -11,11 +14,24 @@ public class Poziom extends Lokalizacja {
         this.listaPomieszczen = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param id variable inherited from the class Lokalizacja
+     *           here is passed to the Costructor method of the class Poziom
+     * @param nazwa variable inherited from the class Lokalizacja
+     *              here is passed to the Constructor method of the class Poziom
+     * @param listaPomieszczen is a list containing elements type Pomieszczenie,
+     *                         here is passed to the Constructor method of the class Poziom
+     */
     public Poziom(int id, String nazwa, ArrayList <Pomieszczenie> listaPomieszczen) {
         super(id,nazwa);
         this.listaPomieszczen = listaPomieszczen;
     }
 
+    /**
+     *
+     * @return the String containing names of variables and their values
+     */
     @Override
     public String toString() {
         return "Poziom{" +
@@ -25,14 +41,28 @@ public class Poziom extends Lokalizacja {
                 '}';
     }
 
+    /**
+     *
+     * @return ArrayList listaPomieszczen
+     */
     public ArrayList<Pomieszczenie> getListaPomieszczen() {
         return listaPomieszczen;
     }
+
+    /**
+     *
+     * @param listaPomieszczen the same as described above, but here is passed to the setListaPomieszczen method
+     *                         so we can change to the other list of the same type
+     */
 
     public void setListaPomieszczen(ArrayList <Pomieszczenie> listaPomieszczen) {
         this.listaPomieszczen = listaPomieszczen;
     }
 
+    /**
+     *
+     * @return the sum of Building's areas from all rooms (describes the total area of the floor)
+     */
     public double getArea() {
         double area = 0;
 
@@ -43,6 +73,10 @@ public class Poziom extends Lokalizacja {
         return area;
     }
 
+    /**
+     *
+     * @return the sum of Building's volumes from all rooms (describes the total volume of the floor)
+     */
     public double getCube() {
         double cube = 0;
 
@@ -53,6 +87,10 @@ public class Poziom extends Lokalizacja {
         return cube;
     }
 
+    /**
+     *
+     * @return the sum of Building's lighting power from all rooms (describes the total lighting power of the floor)
+     */
     public double getLight() {
         double light = 0;
 
@@ -63,6 +101,11 @@ public class Poziom extends Lokalizacja {
         return light;
     }
 
+    /**
+     *
+     * @return the sum of Building's energy consumption for heating from all rooms
+     * (describes the total energy consumption for heating of the floor)
+     */
     public double getHeating() {
         double heating = 0;
 
@@ -73,10 +116,18 @@ public class Poziom extends Lokalizacja {
         return heating;
     }
 
+    /**
+     *
+     * @return the number representing proportion of the lighting power to the area of the floor
+     */
     public double getLightPerSquareMeter() {
         return getLight() / getArea();
     }
 
+    /**
+     *
+     * @return the number representing proportion of the energy consumption for heating to the volume of the floor
+     */
     public double getHeatingPerCubicMeter() {
         return getHeating() / getCube();
     }
