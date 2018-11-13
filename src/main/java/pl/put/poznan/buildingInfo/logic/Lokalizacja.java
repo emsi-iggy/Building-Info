@@ -1,7 +1,7 @@
 package pl.put.poznan.buildingInfo.logic;
 
 /**
- * Class Lokalizacja presents building (Budynek), floor (Poziom) or room (Pomieszczenie)
+ * Class Lokalizacja represents building (Budynek), floor (Poziom) or room (Pomieszczenie)
  */
 public class Lokalizacja {
     private int id;
@@ -15,7 +15,7 @@ public class Lokalizacja {
 
     /**
      *
-     * @param id is an identyfier which is unique for each instance of the class Lokalizacja (location),
+     * @param id is an identifier which is unique for each instance of the class Lokalizacja (location),
      *           here is passed to the Costructor method of the class Lokalizacja
      * @param nazwa is the user-friendly variable which contains the name of the location,
      *              here is passed to the Constructor method of the class Lokalizacja
