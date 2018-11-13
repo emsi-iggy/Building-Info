@@ -56,6 +56,11 @@ public class buildingInfoController {
 
     @RequestMapping(value="/{wyswietl}/{indeksBudynku}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     public String wyswietlKonkretnyBudynek(@PathVariable("wyswietl") String wyswietl,@PathVariable("indeksBudynku") int indeksBudynku) {
+
+        // log the parameters
+        logger.debug(wyswietl);
+        logger.debug(Integer.toString(indeksBudynku));
+
         if(wyswietl.equals("powierzchnia")) {
             return "Powierzchnia budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getArea();
         }
@@ -75,6 +80,12 @@ public class buildingInfoController {
     @RequestMapping(value="/{wyswietl}/{indeksBudynku}/{indeksPoziomu}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     public String wyswietlKonkretnnyPoziom(@PathVariable("wyswietl") String wyswietl, @PathVariable("indeksBudynku") int indeksBudynku,
                                            @PathVariable("indeksPoziomu") int indeksPoziomu) {
+
+        // log the parameters
+        logger.debug(wyswietl);
+        logger.debug(Integer.toString(indeksBudynku));
+        logger.debug(Integer.toString(indeksPoziomu));
+
         if(wyswietl.equals("powierzchnia")) {
             return "Powierzchnia poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
                     + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
@@ -103,6 +114,13 @@ public class buildingInfoController {
     public String wyswietlKonkretnePomieszczenie(@PathVariable("wyswietl") String wyswietl,
                                                  @PathVariable("indeksBudynku") int indeksBudynku, @PathVariable("indeksPoziomu") int indeksPoziomu,
                                            @PathVariable("indeksPomieszczenia") int indeksPomieszczenia) {
+
+        // log the parameters
+        logger.debug(wyswietl);
+        logger.debug(Integer.toString(indeksBudynku));
+        logger.debug(Integer.toString(indeksPoziomu));
+        logger.debug(Integer.toString(indeksPomieszczenia));
+
         //funkcja zwracajaca łączną powierzchnię budynku, poziomu lub pomieszczenia
         if(wyswietl.equals("powierzchnia")) {
             return "Powierzchnia pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
