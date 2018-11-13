@@ -74,6 +74,12 @@ public class buildingInfoController {
         else if(wyswietl.equals("energia")) {//zuzycie energii
             return "Zużycie energii na ogrzewanie budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getHeating();
         }
+        else if(wyswietl.equals("mocPerPowierzchnia")) { //moc oswietlenia / powierzchnia
+            return "Moc oświetlenia w przeliczeniu na jednostkę powierzchni budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getLightPerSquareMeter();
+        }
+        else if(wyswietl.equals("energiaPerKubatura")) {//zuzycie energii / kubatura
+            return "Zużycie energii na ogrzewanie w przeliczeniu na jednostkę objętości dla budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getHeatingPerCubicMeter();
+        }
         return "Podano niepoprawną ścieżkę";
     }
 
@@ -106,6 +112,16 @@ public class buildingInfoController {
             return "Zużycie energii na ogrzewanie poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
                     + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
                     + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getHeating();
+        }
+        else if(wyswietl.equals("mocPerPowierzchnia")) { //moc oswietlenia / powierzchnia
+            return "Moc oświetlenia w przeliczeniu na jednostkę powierzchni poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getLightPerSquareMeter();
+        }
+        else if(wyswietl.equals("energiaPerKubatura")){ //zuzycie energii
+            return "Zużycie energii na ogrzewanie w przeliczeniu na jednostkę objętości dla poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getHeatingPerCubicMeter();
         }
         return "Podano niepoprawną ścieżkę";
     }
@@ -146,6 +162,18 @@ public class buildingInfoController {
                     + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
                     + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
                     + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getHeating();
+        }
+        else if(wyswietl.equals("mocPerPowierzchnia")) { //moc oswietlenia
+            return "Moc oświetlenia w przeliczeniu na jednostkę powierzchni pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
+                    + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getLightPerSquareMeter();
+        }
+        else if(wyswietl.equals("energiaPerKubatura")){ //zuzycie energii
+            return "Zużycie energii na ogrzewanie w przeliczeniu na jednostkę objętości dla pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
+                    + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getHeatingPerCubicMeter();
         }
         return "Podano niepoprawną ścieżkę";
     }
