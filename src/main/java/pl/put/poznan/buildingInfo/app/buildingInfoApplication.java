@@ -17,17 +17,17 @@ public class buildingInfoApplication {
         listaBudynkow = new ArrayList<>();
 
         ArrayList <Pomieszczenie> listaPomieszczenParter = new ArrayList<>();
-        Pomieszczenie kuchnia = new Pomieszczenie(0,"Kuchnia",14,43,30, 3);
-        Pomieszczenie lazienka = new Pomieszczenie(1,"Łazienka",16,40,40,5);
-        Pomieszczenie salon = new Pomieszczenie(2,"Salon",25,70,53,3);
+        Pomieszczenie kuchnia = new Pomieszczenie(0,"Kuchnia",14,43,420, 42);
+        Pomieszczenie lazienka = new Pomieszczenie(1,"Łazienka",16,40,640,80);
+        Pomieszczenie salon = new Pomieszczenie(2,"Salon",25,70,1325,75);
 
         listaPomieszczenParter.add(kuchnia);
         listaPomieszczenParter.add(lazienka);
         listaPomieszczenParter.add(salon);
 
         ArrayList <Pomieszczenie> listaPomieszczenPierwszePietro = new ArrayList<>();
-        Pomieszczenie sypialnia = new Pomieszczenie(0,"Sypialnia",20,50,40,4);
-        Pomieszczenie toaleta = new Pomieszczenie(1,"Toaleta",9,18,30,3);
+        Pomieszczenie sypialnia = new Pomieszczenie(0,"Sypialnia",20,50,800,80);
+        Pomieszczenie toaleta = new Pomieszczenie(1,"Toaleta",9,18,270,27);
 
         listaPomieszczenPierwszePietro.add(sypialnia);
         listaPomieszczenPierwszePietro.add(toaleta);
