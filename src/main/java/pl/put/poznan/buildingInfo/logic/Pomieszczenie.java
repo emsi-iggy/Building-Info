@@ -123,4 +123,20 @@ public class Pomieszczenie extends Lokalizacja{
     public void setArea(double area) {
         this.area = area;
     }
+
+    /**
+     *
+     * @return the number representing proportion of the lighting power to the area of the room
+     */
+    public double getLightPerSquareMeter() {
+        return getLight() / getArea();
+    }
+
+    /**
+     *
+     * @return the number representing proportion of the energy consumption for heating to the volume of the room
+     */
+    public double getHeatingPerCubicMeter() {
+        return getHeating() / getCube();
+    }
 }
