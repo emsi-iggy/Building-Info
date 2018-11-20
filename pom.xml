@@ -7,8 +7,8 @@
     <groupId>pl.put.poznan</groupId>
     <artifactId>io-project-architecture</artifactId>
          
-    <!-- <packaging>war</packaging> -->
-    <version>1.30-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <version>1.36-SNAPSHOT</version>
     <name>Building Info</name>
          
     <parent>
