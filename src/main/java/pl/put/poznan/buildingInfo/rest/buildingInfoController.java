@@ -36,7 +36,7 @@ public class buildingInfoController {
         return "";
     }
 
-    @RequestMapping(value="/{wyswietl}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @RequestMapping(value="/w/{wyswietl}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     public String wyswietlWszystko(@PathVariable("wyswietl") String wyswietl) {
         if(wyswietl.equals("powierzchnia")) {
 
@@ -54,7 +54,7 @@ public class buildingInfoController {
         return "Na razie ta metoda nic nie robi";
     }
 
-    @RequestMapping(value="/{wyswietl}/{indeksBudynku}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @RequestMapping(value="/w/{wyswietl}/{indeksBudynku}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     public String wyswietlKonkretnyBudynek(@PathVariable("wyswietl") String wyswietl,@PathVariable("indeksBudynku") int indeksBudynku) {
 
         // log the parameters
@@ -83,7 +83,7 @@ public class buildingInfoController {
         return "Podano niepoprawną ścieżkę";
     }
 
-    @RequestMapping(value="/{wyswietl}/{indeksBudynku}/{indeksPoziomu}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @RequestMapping(value="/w/{wyswietl}/{indeksBudynku}/{indeksPoziomu}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     public String wyswietlKonkretnnyPoziom(@PathVariable("wyswietl") String wyswietl, @PathVariable("indeksBudynku") int indeksBudynku,
                                            @PathVariable("indeksPoziomu") int indeksPoziomu) {
 
@@ -126,7 +126,7 @@ public class buildingInfoController {
         return "Podano niepoprawną ścieżkę";
     }
 
-    @RequestMapping(value="/{wyswietl}/{indeksBudynku}/{indeksPoziomu}/{indeksPomieszczenia}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @RequestMapping(value="/w/{wyswietl}/{indeksBudynku}/{indeksPoziomu}/{indeksPomieszczenia}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     public String wyswietlKonkretnePomieszczenie(@PathVariable("wyswietl") String wyswietl,
                                                  @PathVariable("indeksBudynku") int indeksBudynku, @PathVariable("indeksPoziomu") int indeksPoziomu,
                                            @PathVariable("indeksPomieszczenia") int indeksPomieszczenia) {
