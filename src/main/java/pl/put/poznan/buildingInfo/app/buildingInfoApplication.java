@@ -3,6 +3,7 @@ package pl.put.poznan.buildingInfo.app;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.put.poznan.buildingInfo.logic.Budynek;
+import pl.put.poznan.buildingInfo.logic.JSONCreator;
 import pl.put.poznan.buildingInfo.logic.Pomieszczenie;
 import pl.put.poznan.buildingInfo.logic.Poziom;
 
@@ -15,6 +16,7 @@ public class buildingInfoApplication {
 
     public static void main(String[] args) {
         listaBudynkow = new ArrayList<>();
+        JSONCreator kreator = new JSONCreator();
 
         ArrayList <Pomieszczenie> listaPomieszczenParter = new ArrayList<>();
         Pomieszczenie kuchnia = new Pomieszczenie(0,"Kuchnia",14,43,420, 42);
