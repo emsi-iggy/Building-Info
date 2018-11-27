@@ -14,7 +14,6 @@ public class Budynek extends Lokalizacja{
     public Budynek() {
         super();
         this.listaPoziomow = new ArrayList<>();
-
     }
 
     /**
@@ -29,7 +28,6 @@ public class Budynek extends Lokalizacja{
     public Budynek(int id, String nazwa, ArrayList <Poziom> listaPoziomow) {
         super(id, nazwa);
         this.listaPoziomow = listaPoziomow;
-
     }
 
     /**
@@ -116,6 +114,23 @@ public class Budynek extends Lokalizacja{
             heating += poziom.getHeating();
         }
         return heating;
+    }
+
+    /**
+     *
+     * @return the date when the last renovation of the building was made.
+     * It is the date of last renovation of any floor in this building.
+     */
+    public Date getDataRemontu() {
+        Date dataRemontu = new Date();
+
+        for(Poziom poziom : listaPoziomow) {
+            if(dataRemontu.after( poziom.getDataRemontu() )) {
+                dataRemontu = poziom.getDataRemontu();
+            }
+        }
+
+        return dataRemontu;
     }
 
     /**
