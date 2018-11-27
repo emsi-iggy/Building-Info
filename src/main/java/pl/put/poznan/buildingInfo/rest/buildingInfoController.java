@@ -80,6 +80,9 @@ public class buildingInfoController {
         else if(wyswietl.equals("energiaPerKubatura")) {//zuzycie energii / kubatura
             return "Zużycie energii na ogrzewanie w przeliczeniu na jednostkę objętości dla budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getHeatingPerCubicMeter();
         }
+        else if(wyswietl.equals("dataRemontu")) {//data wykonania ostatniego remontu
+            return "Data wykonania ostatniego remontu w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getDataRemontu();
+        }
         return "Podano niepoprawną ścieżkę";
     }
 
@@ -118,10 +121,15 @@ public class buildingInfoController {
                     + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
                     + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getLightPerSquareMeter();
         }
-        else if(wyswietl.equals("energiaPerKubatura")){ //zuzycie energii
+        else if(wyswietl.equals("energiaPerKubatura")){ //zuzycie energii / kubatura
             return "Zużycie energii na ogrzewanie w przeliczeniu na jednostkę objętości dla poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
                     + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
                     + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getHeatingPerCubicMeter();
+        }
+        else if(wyswietl.equals("dataRemontu")){ //data wykonania ostatniego remontu
+            return "Data wykonania ostatniego remontu w poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getDataRemontu();
         }
         return "Podano niepoprawną ścieżkę";
     }
@@ -163,17 +171,23 @@ public class buildingInfoController {
                     + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
                     + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getHeating();
         }
-        else if(wyswietl.equals("mocPerPowierzchnia")) { //moc oswietlenia
+        else if(wyswietl.equals("mocPerPowierzchnia")) { //moc oswietlenia / powierzchnia
             return "Moc oświetlenia w przeliczeniu na jednostkę powierzchni pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
                     + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
                     + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
                     + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getLightPerSquareMeter();
         }
-        else if(wyswietl.equals("energiaPerKubatura")){ //zuzycie energii
+        else if(wyswietl.equals("energiaPerKubatura")){ //zuzycie energii / kubatura
             return "Zużycie energii na ogrzewanie w przeliczeniu na jednostkę objętości dla pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
                     + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
                     + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
                     + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getHeatingPerCubicMeter();
+        }
+        else if(wyswietl.equals("dataRemontu")){ //data wykonania ostatniego remontu
+            return "Data wykonania ostatniego remontu w pomieszczeniu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
+                    + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getDataRemontu();
         }
         return "Podano niepoprawną ścieżkę";
     }
