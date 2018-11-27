@@ -1,6 +1,7 @@
 package pl.put.poznan.buildingInfo.logic;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Class Poziom represents class Lokalizacja with additional attributes such as ArrayList type Pomieszczenie - listaPomieszczen
@@ -114,6 +115,23 @@ public class Poziom extends Lokalizacja {
         }
 
         return heating;
+    }
+
+    /**
+     *
+     * @return the date when the last renovation of the floor was made.
+     * It is the date of last renovation of any room at this floor.
+     */
+    public Date getDataRemontu() {
+        Date dataRemontu = new Date();
+
+        for(Pomieszczenie pomieszczenie : listaPomieszczen) {
+            if(dataRemontu.after( pomieszczenie.getDataRemontu() )) {
+                dataRemontu = pomieszczenie.getDataRemontu();
+            }
+        }
+
+        return dataRemontu;
     }
 
     /**
