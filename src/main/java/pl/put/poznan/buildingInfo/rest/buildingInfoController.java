@@ -56,82 +56,95 @@ public class buildingInfoController {
 
     @RequestMapping(value="/w/{wyswietl}/{indeksBudynku}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     public String wyswietlKonkretnyBudynek(@PathVariable("wyswietl") String wyswietl,@PathVariable("indeksBudynku") int indeksBudynku) {
+        boolean czyJestIndeksBudynku = false;
+        for(Budynek budynek : listaBudynkow) {
+            if(budynek.getId()==indeksBudynku) {
+                czyJestIndeksBudynku = true;
+                break;
+            }
+        }
+        if(czyJestIndeksBudynku) {
+            // log the parameters
+            logger.debug(wyswietl);
+            logger.debug(Integer.toString(indeksBudynku));
 
-        // log the parameters
-        logger.debug(wyswietl);
-        logger.debug(Integer.toString(indeksBudynku));
-
-        if(wyswietl.equals("powierzchnia")) {
-            return "Powierzchnia budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getArea();
+            if (wyswietl.equals("powierzchnia")) {
+                return "Powierzchnia budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getArea();
+            } else if (wyswietl.equals("kubatura")) {
+                return "Kubatura budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getCube();
+            } else if (wyswietl.equals("moc")) { //moc oswietlenia
+                return "Moc oświetlenia budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getLight();
+            } else if (wyswietl.equals("energia")) {//zuzycie energii
+                return "Zużycie energii na ogrzewanie budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getHeating();
+            } else if (wyswietl.equals("mocPerPowierzchnia")) { //moc oswietlenia / powierzchnia
+                return "Moc oświetlenia w przeliczeniu na jednostkę powierzchni budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getLightPerSquareMeter();
+            } else if (wyswietl.equals("energiaPerKubatura")) {//zuzycie energii / kubatura
+                return "Zużycie energii na ogrzewanie w przeliczeniu na jednostkę objętości dla budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getHeatingPerCubicMeter();
+            } else if (wyswietl.equals("dataRemontu")) {//data wykonania ostatniego remontu
+                return "Data wykonania ostatniego remontu w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getDataRemontu();
+            }
         }
-
-        else if(wyswietl.equals("kubatura")) {
-            return "Kubatura budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getCube();
-        }
-        else if(wyswietl.equals("moc")) { //moc oswietlenia
-            return "Moc oświetlenia budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getLight();
-        }
-        else if(wyswietl.equals("energia")) {//zuzycie energii
-            return "Zużycie energii na ogrzewanie budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getHeating();
-        }
-        else if(wyswietl.equals("mocPerPowierzchnia")) { //moc oswietlenia / powierzchnia
-            return "Moc oświetlenia w przeliczeniu na jednostkę powierzchni budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getLightPerSquareMeter();
-        }
-        else if(wyswietl.equals("energiaPerKubatura")) {//zuzycie energii / kubatura
-            return "Zużycie energii na ogrzewanie w przeliczeniu na jednostkę objętości dla budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getHeatingPerCubicMeter();
-        }
-        else if(wyswietl.equals("dataRemontu")) {//data wykonania ostatniego remontu
-            return "Data wykonania ostatniego remontu w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getDataRemontu();
-        }
-        return "Podano niepoprawną ścieżkę";
+        else return "Podano nieprawidłowy indeks budynku";
+        return "Podano niepoprawną ścieżkę dotyczącą wyświetlania danych (indeks budynku jest poprawny)";
     }
 
     @RequestMapping(value="/w/{wyswietl}/{indeksBudynku}/{indeksPoziomu}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     public String wyswietlKonkretnnyPoziom(@PathVariable("wyswietl") String wyswietl, @PathVariable("indeksBudynku") int indeksBudynku,
                                            @PathVariable("indeksPoziomu") int indeksPoziomu) {
 
-        // log the parameters
-        logger.debug(wyswietl);
-        logger.debug(Integer.toString(indeksBudynku));
-        logger.debug(Integer.toString(indeksPoziomu));
+        boolean czyJestIndeksBudynku = false;
+        boolean czyJestIndeksPoziomu = false;
+        for(Budynek budynek : listaBudynkow) {
+            if(budynek.getId()==indeksBudynku) {
+                czyJestIndeksBudynku = true;
+                for(Poziom poziom : listaBudynkow.get(indeksBudynku).getListaPoziomow()) {
+                    if(poziom.getId()==indeksPoziomu) {
+                        czyJestIndeksPoziomu = true;
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        if(czyJestIndeksBudynku && czyJestIndeksPoziomu) {
+            // log the parameters
+            logger.debug(wyswietl);
+            logger.debug(Integer.toString(indeksBudynku));
+            logger.debug(Integer.toString(indeksPoziomu));
 
-        if(wyswietl.equals("powierzchnia")) {
-            return "Powierzchnia poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
-                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
-                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getArea();
+            if (wyswietl.equals("powierzchnia")) {
+                return "Powierzchnia poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getArea();
+            } else if (wyswietl.equals("kubatura")) {
+                return "Kubatura poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getCube();
+            } else if (wyswietl.equals("moc")) { //moc oswietlenia
+                return "Moc oświetlenia poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getLight();
+            } else if (wyswietl.equals("energia")) { //zuzycie energii
+                return "Zużycie energii na ogrzewanie poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getHeating();
+            } else if (wyswietl.equals("mocPerPowierzchnia")) { //moc oswietlenia / powierzchnia
+                return "Moc oświetlenia w przeliczeniu na jednostkę powierzchni poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getLightPerSquareMeter();
+            } else if (wyswietl.equals("energiaPerKubatura")) { //zuzycie energii / kubatura
+                return "Zużycie energii na ogrzewanie w przeliczeniu na jednostkę objętości dla poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getHeatingPerCubicMeter();
+            } else if (wyswietl.equals("dataRemontu")) { //data wykonania ostatniego remontu
+                return "Data wykonania ostatniego remontu w poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getDataRemontu();
+            }
         }
-
-        else if(wyswietl.equals("kubatura")) {
-            return "Kubatura poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
-                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
-                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getCube();
-        }
-        else if(wyswietl.equals("moc")) { //moc oswietlenia
-            return "Moc oświetlenia poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
-                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
-                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getLight();
-        }
-        else if(wyswietl.equals("energia")){ //zuzycie energii
-            return "Zużycie energii na ogrzewanie poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
-                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
-                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getHeating();
-        }
-        else if(wyswietl.equals("mocPerPowierzchnia")) { //moc oswietlenia / powierzchnia
-            return "Moc oświetlenia w przeliczeniu na jednostkę powierzchni poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
-                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
-                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getLightPerSquareMeter();
-        }
-        else if(wyswietl.equals("energiaPerKubatura")){ //zuzycie energii / kubatura
-            return "Zużycie energii na ogrzewanie w przeliczeniu na jednostkę objętości dla poziomu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
-                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
-                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getHeatingPerCubicMeter();
-        }
-        else if(wyswietl.equals("dataRemontu")){ //data wykonania ostatniego remontu
-            return "Data wykonania ostatniego remontu w poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
-                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
-                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getDataRemontu();
-        }
-        return "Podano niepoprawną ścieżkę";
+        if(!czyJestIndeksBudynku) return "Podano nieprawidłowy indeks budynku";
+        if(!czyJestIndeksPoziomu) return "Podano nieprawidłowy indeks poziomu (indeks budynku jest poprawny)";
+        return "Podano niepoprawną ścieżkę dotyczącą wyświetlania danych (indeks budynku i indeks poziomu są poprawne)";
     }
 
     @RequestMapping(value="/w/{wyswietl}/{indeksBudynku}/{indeksPoziomu}/{indeksPomieszczenia}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
@@ -139,57 +152,76 @@ public class buildingInfoController {
                                                  @PathVariable("indeksBudynku") int indeksBudynku, @PathVariable("indeksPoziomu") int indeksPoziomu,
                                            @PathVariable("indeksPomieszczenia") int indeksPomieszczenia) {
 
-        // log the parameters
-        logger.debug(wyswietl);
-        logger.debug(Integer.toString(indeksBudynku));
-        logger.debug(Integer.toString(indeksPoziomu));
-        logger.debug(Integer.toString(indeksPomieszczenia));
+        boolean czyJestIndeksBudynku = false;
+        boolean czyJestIndeksPoziomu = false;
+        boolean czyJestIndeksPomieszczenia = false;
+        for(Budynek budynek : listaBudynkow) {
+            if(budynek.getId()==indeksBudynku) {
+                czyJestIndeksBudynku = true;
+                for(Poziom poziom : listaBudynkow.get(indeksBudynku).getListaPoziomow()) {
+                    if(poziom.getId()==indeksPoziomu) {
+                        czyJestIndeksPoziomu = true;
+                        for(Pomieszczenie pomieszczenie : listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen()) {
+                            if(pomieszczenie.getId()==indeksPomieszczenia) {
+                                czyJestIndeksPomieszczenia = true;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        if(czyJestIndeksBudynku && czyJestIndeksPoziomu && czyJestIndeksPomieszczenia) {
+            // log the parameters
+            logger.debug(wyswietl);
+            logger.debug(Integer.toString(indeksBudynku));
+            logger.debug(Integer.toString(indeksPoziomu));
+            logger.debug(Integer.toString(indeksPomieszczenia));
 
-        //funkcja zwracajaca łączną powierzchnię budynku, poziomu lub pomieszczenia
-        if(wyswietl.equals("powierzchnia")) {
-            return "Powierzchnia pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
-                   + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
-                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
-                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getArea();
+            //funkcja zwracajaca łączną powierzchnię budynku, poziomu lub pomieszczenia
+            if (wyswietl.equals("powierzchnia")) {
+                return "Powierzchnia pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
+                        + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getArea();
+            } else if (wyswietl.equals("kubatura")) {
+                return "Kubatura pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
+                        + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getCube();
+            } else if (wyswietl.equals("moc")) { //moc oswietlenia
+                return "Moc oświetlenia pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
+                        + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getLight();
+            } else if (wyswietl.equals("energia")) { //zuzycie energii
+                return "Zużycie energii na ogrzewanie pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
+                        + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getHeating();
+            } else if (wyswietl.equals("mocPerPowierzchnia")) { //moc oswietlenia / powierzchnia
+                return "Moc oświetlenia w przeliczeniu na jednostkę powierzchni pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
+                        + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getLightPerSquareMeter();
+            } else if (wyswietl.equals("energiaPerKubatura")) { //zuzycie energii / kubatura
+                return "Zużycie energii na ogrzewanie w przeliczeniu na jednostkę objętości dla pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
+                        + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getHeatingPerCubicMeter();
+            } else if (wyswietl.equals("dataRemontu")) { //data wykonania ostatniego remontu
+                return "Data wykonania ostatniego remontu w pomieszczeniu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
+                        + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getDataRemontu();
+            }
         }
-
-        else if(wyswietl.equals("kubatura")) {
-            return "Kubatura pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
-                    + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
-                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
-                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getCube();
-        }
-        else if(wyswietl.equals("moc")) { //moc oswietlenia
-            return "Moc oświetlenia pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
-                    + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
-                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
-                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getLight();
-        }
-        else if(wyswietl.equals("energia")){ //zuzycie energii
-            return "Zużycie energii na ogrzewanie pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
-                    + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
-                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
-                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getHeating();
-        }
-        else if(wyswietl.equals("mocPerPowierzchnia")) { //moc oswietlenia / powierzchnia
-            return "Moc oświetlenia w przeliczeniu na jednostkę powierzchni pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
-                    + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
-                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
-                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getLightPerSquareMeter();
-        }
-        else if(wyswietl.equals("energiaPerKubatura")){ //zuzycie energii / kubatura
-            return "Zużycie energii na ogrzewanie w przeliczeniu na jednostkę objętości dla pomieszczenia " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
-                    + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
-                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
-                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getHeatingPerCubicMeter();
-        }
-        else if(wyswietl.equals("dataRemontu")){ //data wykonania ostatniego remontu
-            return "Data wykonania ostatniego remontu w pomieszczeniu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
-                    + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
-                    + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
-                    + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getDataRemontu();
-        }
-        return "Podano niepoprawną ścieżkę";
+        if(!czyJestIndeksBudynku) return "Podano nieprawidłowy indeks budynku";
+        if(!czyJestIndeksPoziomu) return "Podano nieprawidłowy indeks poziomu (indeks budynku jest poprawny)";
+        if(!czyJestIndeksPomieszczenia) return "Podano nieprawidłowy indeks pomieszczenia (indeks budynku i indeks poziomu są poprawne)";
+        return "Podano niepoprawną ścieżkę dotyczącą wyświetlania danych (indeks budynku, indeks poziomu i indeks pomieszczenia są poprawne)";
     }
 
 
