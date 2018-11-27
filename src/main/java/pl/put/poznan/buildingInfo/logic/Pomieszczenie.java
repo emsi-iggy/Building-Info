@@ -41,6 +41,7 @@ public class Pomieszczenie extends Lokalizacja{
         this.cube = cube;
         this.heating = heating;
         this.light = light;
+        this.dataRemontu = new Date();
     }
 
     /**
