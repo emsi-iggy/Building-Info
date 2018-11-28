@@ -135,6 +135,34 @@ public class Budynek extends Lokalizacja{
 
     /**
      *
+     * @return the sum of Building's windows areas from all floors (describes the total windows area of the building)
+     */
+    public double getPowierzchniaOkien() {
+        double powierzchnia = 0;
+
+        for(Poziom poziom : listaPoziomow) {
+            powierzchnia += poziom.getPowierzchniaOkien();
+        }
+
+        return powierzchnia;
+    }
+
+    /**
+     *
+     * @return the number of windows in the building (describes the total number of windows in all floors)
+     */
+    public int getLiczbaOkien() {
+        int liczbaOkien = 0;
+
+        for(Poziom poziom : listaPoziomow) {
+            liczbaOkien += poziom.getLiczbaOkien();
+        }
+
+        return liczbaOkien;
+    }
+
+    /**
+     *
      * @return the number representing proportion of the lighting power to the area of the building
      */
     public double getLightPerSquareMeter() {
