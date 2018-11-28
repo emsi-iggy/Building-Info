@@ -136,6 +136,34 @@ public class Poziom extends Lokalizacja {
 
     /**
      *
+     * @return the sum of Building's windows areas from all rooms (describes the total windows area of the floor)
+     */
+    public double getPowierzchniaOkien() {
+        double powierzchnia = 0;
+
+        for(Pomieszczenie pomieszczenie : listaPomieszczen) {
+            powierzchnia += pomieszczenie.getPowierzchniaOkien();
+        }
+
+        return powierzchnia;
+    }
+
+    /**
+     *
+     * @return the number of windows in the floor (describes the total number of windows in all rooms)
+     */
+    public int getLiczbaOkien() {
+        int liczbaOkien = 0;
+
+        for(Pomieszczenie pomieszczenie : listaPomieszczen) {
+            liczbaOkien += pomieszczenie.getListaOkien().size();
+        }
+
+        return liczbaOkien;
+    }
+
+    /**
+     *
      * @return the number representing proportion of the lighting power to the area of the floor
      */
     public double getLightPerSquareMeter() {
