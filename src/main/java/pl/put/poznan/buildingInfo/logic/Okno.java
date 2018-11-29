@@ -1,8 +1,5 @@
 package pl.put.poznan.buildingInfo.logic;
 
-enum RodzajOknaPCV {TRADYCYJNE,POLACIOWE,BALKONOWE,NIEZNANY;}
-enum SposobOtwarciaOkna {OBROTOWE,UCHYLNE,WYSOKOOSIOWE,UCHYLNOOBROTOWE,NIEZNANY;}
-
 /**
  * Class Okno (window) is the addition to the class Lokalizacja with many double type and enum type attributes
  * such as area, width, height, price, type and type of opening the window
@@ -15,6 +12,9 @@ public class Okno {
     private RodzajOknaPCV rodzajOknaPCV;
     private SposobOtwarciaOkna sposobOtwarciaOkna;
 
+    public enum RodzajOknaPCV {TRADYCYJNE,POLACIOWE,BALKONOWE,NIEZNANY;}
+    public enum SposobOtwarciaOkna {OBROTOWE,UCHYLNE,PRZESUWNE,UCHYLNOOBROTOWE,UCHYLNOROZWIERNE,NIEZNANY;}
+
     public Okno() {
         this.powierzchnia = 0;
         this.szerokosc = 0;
@@ -26,7 +26,6 @@ public class Okno {
 
     /**
      *
-     * @param powierzchnia variable represents the area of the window
      * @param szerokosc variable represents the width of the window
      * @param wysokosc variable represents the height of the window
      * @param cena variable represents the price of the window
@@ -35,8 +34,8 @@ public class Okno {
      * @param sposobOtwarciaOkna variable which contains one value from the set of constants SposobOtwarciaOkna
      *      *                      represents the type of opening the window
      */
-    public Okno(double powierzchnia, double szerokosc, double wysokosc, double cena, RodzajOknaPCV rodzajOknaPCV, SposobOtwarciaOkna sposobOtwarciaOkna) {
-        this.powierzchnia = powierzchnia;
+    public Okno(double szerokosc, double wysokosc, double cena, RodzajOknaPCV rodzajOknaPCV, SposobOtwarciaOkna sposobOtwarciaOkna) {
+        this.powierzchnia = szerokosc * wysokosc;
         this.szerokosc = szerokosc;
         this.wysokosc = wysokosc;
         this.cena = cena;
@@ -70,7 +69,7 @@ public class Okno {
 
     /**
      *
-     * @param powierzchnia the same as described above, but here is passed to the setPowierzchnia method,
+     * @param powierzchnia variable represents the area of the window, here is passed to the setPowierzchnia method,
      *                     so we can set the value of the area
      */
     public void setPowierzchnia(double powierzchnia) {
