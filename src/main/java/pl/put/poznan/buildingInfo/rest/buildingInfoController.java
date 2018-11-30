@@ -82,6 +82,10 @@ public class buildingInfoController {
                 return "Zużycie energii na ogrzewanie w przeliczeniu na jednostkę objętości dla budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getHeatingPerCubicMeter();
             } else if (wyswietl.equals("dataRemontu")) {//data wykonania ostatniego remontu
                 return "Data wykonania ostatniego remontu w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getDataRemontu();
+            } else if (wyswietl.equals("powierzchniaOkien")) {//laczna powierzchnia okien w budynku
+                return "Łączna powierzchnia okien w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getPowierzchniaOkien();
+            } else if (wyswietl.equals("liczbaOkien")) {//laczna liczba okien w budynku
+                return "Łączna liczba okien w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = " + listaBudynkow.get(indeksBudynku).getLiczbaOkien();
             }
         }
         else return "Podano nieprawidłowy indeks budynku";
@@ -140,6 +144,14 @@ public class buildingInfoController {
                 return "Data wykonania ostatniego remontu w poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
                         + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
                         + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getDataRemontu();
+            } else if (wyswietl.equals("powierzchniaOkien")) { //laczna powierzchnia okien w poziomie
+                return "Łączna powierzchnia okien w poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getPowierzchniaOkien();
+            } else if (wyswietl.equals("liczbaOkien")) { //laczna liczba okien w poziomie
+                return "Łączna liczba okien w poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getLiczbaOkien();
             }
         }
         if(!czyJestIndeksBudynku) return "Podano nieprawidłowy indeks budynku";
@@ -216,6 +228,16 @@ public class buildingInfoController {
                         + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
                         + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
                         + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getDataRemontu();
+            } else if (wyswietl.equals("powierzchniaOkien")) { //laczna powierzchnia okien w pomieszczeniu
+                return "Łączna powierzchnia okien w pomieszczeniu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
+                        + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getPowierzchniaOkien();
+            } else if (wyswietl.equals("liczbaOkien")) { //laczna liczba okien w pomieszczeniu
+                return "Łączna liczba okien w pomieszczeniu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
+                        + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
+                        + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getListaOkien().size();
             }
         }
         if(!czyJestIndeksBudynku) return "Podano nieprawidłowy indeks budynku";
