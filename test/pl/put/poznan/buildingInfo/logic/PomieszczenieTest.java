@@ -30,13 +30,15 @@ public class PomieszczenieTest {
     @Test
     public void testGetPowierzchniaOkienLiczbyCalkowite() {
         listaOkien.add(new Okno(3, 5, 940, TRADYCYJNE, UCHYLNOROZWIERNE));
+        pomieszczenie.setListaOkien(listaOkien);
         assertEquals(3*5,pomieszczenie.getPowierzchniaOkien(),0.001);
     }
 
     @Test
     public void testGetPowierzchniaOkienLiczbyRzeczywiste() {
         listaOkien.add(new Okno(1.2,0.7,430,TRADYCYJNE,UCHYLNOROZWIERNE));
-        assertEquals(3*5+1.2*0.7,pomieszczenie.getPowierzchniaOkien(),0.001);
+        pomieszczenie.setListaOkien(listaOkien);
+        assertEquals(1.2*0.7,pomieszczenie.getPowierzchniaOkien(),0.001);
     }
 
     @Test
