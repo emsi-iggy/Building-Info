@@ -123,7 +123,7 @@ public class Poziom extends Lokalizacja {
      * It is the date of last renovation of any room at this floor.
      */
     public Date getDataRemontu() {
-        Date dataRemontu = new Date();
+        Date dataRemontu = listaPomieszczen.get(0).getDataRemontu();
 
         for(Pomieszczenie pomieszczenie : listaPomieszczen) {
             if(dataRemontu.after( pomieszczenie.getDataRemontu() )) {
