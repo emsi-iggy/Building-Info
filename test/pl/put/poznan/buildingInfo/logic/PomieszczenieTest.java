@@ -36,6 +36,10 @@ public class PomieszczenieTest {
     @Test
     public void testGetPowierzchniaOkienLiczbyRzeczywiste() {
         listaOkien.add(new Okno(1.2,0.7,430,TRADYCYJNE,UCHYLNOROZWIERNE));
-        assertEquals(3*5,pomieszczenie.getPowierzchniaOkien(),0.001);
+        assertEquals(3*5+1.2*0.7,pomieszczenie.getPowierzchniaOkien(),0.001);
+    }
+
+    @Test
+    public void getPowierzchniaOkien() {
     }
 }
