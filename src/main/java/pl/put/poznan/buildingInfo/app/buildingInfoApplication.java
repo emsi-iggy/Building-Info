@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.put.poznan.buildingInfo.logic.*;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 import static pl.put.poznan.buildingInfo.logic.Okno.RodzajOknaPCV.*;

@@ -1,15 +1,10 @@
 package pl.put.poznan.buildingInfo.rest;
 
-import com.fasterxml.jackson.core.json.JsonReadContext;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.SocketUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.buildingInfo.logic.*;
-import java.util.ArrayList;
-import static org.junit.Assert.*;
 import static pl.put.poznan.buildingInfo.app.buildingInfoApplication.listaBudynkow;
 
 @RestController //wpisz w przegladarke: localhost:8080/wyswietl
