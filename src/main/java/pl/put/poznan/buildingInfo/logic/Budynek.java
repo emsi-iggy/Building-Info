@@ -122,8 +122,13 @@ public class Budynek extends Lokalizacja{
      * It is the date of last renovation of any floor in this building.
      */
     public Date getDataRemontu() {
-        Date dataRemontu = listaPoziomow.get(0).getDataRemontu();
+        Date dataRemontu;
 
+        if((listaPoziomow == null) || (listaPoziomow.size() == 0)) {
+            return null;
+        }
+
+        dataRemontu = listaPoziomow.get(0).getDataRemontu();
         for(Poziom poziom : listaPoziomow) {
             if(dataRemontu.after( poziom.getDataRemontu() )) {
                 dataRemontu = poziom.getDataRemontu();
