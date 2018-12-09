@@ -167,7 +167,14 @@ public class Poziom extends Lokalizacja {
      * @return the number representing proportion of the lighting power to the area of the floor
      */
     public double getLightPerSquareMeter() {
-        return getLight() / getArea();
+        double powierzchnia;
+
+        powierzchnia = getArea();
+        if(powierzchnia == 0) {
+            return 0;
+        }
+
+        return getLight() / powierzchnia;
     }
 
     /**
@@ -175,6 +182,13 @@ public class Poziom extends Lokalizacja {
      * @return the number representing proportion of the energy consumption for heating to the volume of the floor
      */
     public double getHeatingPerCubicMeter() {
-        return getHeating() / getCube();
+        double kubatura;
+
+        kubatura = getCube();
+        if(kubatura == 0) {
+            return 0;
+        }
+
+        return getHeating() / kubatura;
     }
 }

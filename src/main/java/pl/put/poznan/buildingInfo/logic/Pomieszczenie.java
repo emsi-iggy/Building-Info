@@ -233,6 +233,10 @@ public class Pomieszczenie extends Lokalizacja{
      * @return the number representing proportion of the lighting power to the area of the room
      */
     public double getLightPerSquareMeter() {
+        if(getArea() == 0) {
+            return 0;
+        }
+
         return getLight() / getArea();
     }
 
@@ -241,6 +245,10 @@ public class Pomieszczenie extends Lokalizacja{
      * @return the number representing proportion of the energy consumption for heating to the volume of the room
      */
     public double getHeatingPerCubicMeter() {
+        if(getCube() == 0) {
+            return 0;
+        }
+
         return getHeating() / getCube();
     }
 

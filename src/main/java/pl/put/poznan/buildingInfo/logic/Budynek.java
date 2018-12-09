@@ -166,7 +166,14 @@ public class Budynek extends Lokalizacja{
      * @return the number representing proportion of the lighting power to the area of the building
      */
     public double getLightPerSquareMeter() {
-        return getLight() / getArea();
+        double powierzchnia;
+
+        powierzchnia = getArea();
+        if(powierzchnia == 0) {
+            return 0;
+        }
+
+        return getLight() / powierzchnia;
     }
 
     /**
@@ -174,6 +181,13 @@ public class Budynek extends Lokalizacja{
      * @return the number representing proportion of the energy consumption for heating to the volume of the building
      */
     public double getHeatingPerCubicMeter() {
-        return getHeating() / getCube();
+        double kubatura;
+
+        kubatura = getCube();
+        if(kubatura == 0) {
+            return 0;
+        }
+
+        return getHeating() / kubatura;
     }
 }
