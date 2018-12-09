@@ -1,15 +1,11 @@
 package pl.put.poznan.buildingInfo.rest;
 
-import com.fasterxml.jackson.core.json.JsonReadContext;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.SocketUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.buildingInfo.logic.*;
-import java.util.ArrayList;
-import static org.junit.Assert.*;
+
 import static pl.put.poznan.buildingInfo.app.buildingInfoApplication.listaBudynkow;
 
 @RestController //wpisz w przegladarke: localhost:8080/wyswietl
@@ -87,6 +83,10 @@ public class buildingInfoController {
         else return "Podano nieprawidłowy indeks budynku";
         return "Podano niepoprawną ścieżkę dotyczącą wyświetlania danych (indeks budynku jest poprawny)";
     }
+
+
+
+
 
     @RequestMapping(value="/w/{wyswietl}/{indeksBudynku}/{indeksPoziomu}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     public String wyswietlKonkretnnyPoziom(@PathVariable("wyswietl") String wyswietl, @PathVariable("indeksBudynku") int indeksBudynku,
@@ -224,6 +224,44 @@ public class buildingInfoController {
         return "Podano niepoprawną ścieżkę dotyczącą wyświetlania danych (indeks budynku, indeks poziomu i indeks pomieszczenia są poprawne)";
     }
 
+
+
+    @RequestMapping(value="/s/{sprawdz}/{indeksBudynku}/{limit}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    public String wyswietlKonkretnePomieszczenie(@PathVariable("sprawdz") String sprawdz,
+                                                 @PathVariable("indeksBudynku") int indeksBudynku,
+                                                 @PathVariable("limit") double limit) {
+
+        boolean czyJestIndeksBudynku = false;
+        boolean czyJestIndeksPoziomu = false;
+        boolean czyJestIndeksPomieszczenia = false;
+        for(Budynek budynek : listaBudynkow) {
+            if(budynek.getId()==indeksBudynku) {
+                czyJestIndeksBudynku = true;
+                break;
+            }
+        }
+
+
+
+        if(czyJestIndeksBudynku && czyJestIndeksPoziomu) {
+                // log the parameters
+                logger.debug(sprawdz);
+                logger.debug(Integer.toString(indeksBudynku));
+                logger.debug(Double.toString(limit));
+
+                //funkcja zwracajaca pomieszczenia, które przekracaja limity
+                if (sprawdz.equals("limitEnergiiCieplnej")) {
+                    return "Pomieszczenia, ktore przekracaja limit zuzycia energii cieplnej w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + ": "
+                     + listaBudynkow.get(indeksBudynku).getListaPoziomow().getHeatingLimit(limit);
+
+                } else if (sprawdz.equals("limitMocyOswietleniowej")) {
+                    return "Pomieszczenia, ktore przekracaja limit mocy oswietleniowej " + listaBudynkow.get(indeksBudynku).getNazwa() + ": "
+                            + listaBudynkow.get(indeksBudynku).getListaPoziomow().getLightLimit(limit);
+                }
+        }
+                if(!czyJestIndeksBudynku) return "Podano nieprawidlowy indeks budynku";
+                return "Podano niepoprawna sciezke dotyczaca wyswietlania danych (indeks budynku, indeks poziomu i indeks pomieszczenia sa poprawne)";
+    }
 
 /* KOD Z TRASNFORMERA:
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")

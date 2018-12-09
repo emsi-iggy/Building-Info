@@ -135,6 +135,36 @@ public class Budynek extends Lokalizacja{
 
     /**
      *
+     * @return
+     *
+     */
+    public Date getDataRemontu() {
+        Date dataRemontu = new Date();
+
+        for(Poziom poziom : listaPoziomow) {
+            if(dataRemontu.after( poziom.getDataRemontu() )) {
+                dataRemontu = poziom.getDataRemontu();
+            }
+        }
+
+        return dataRemontu;
+    }
+
+    public ArrayList<Pomieszczenie> getHeatingLimit(double limit) {
+        ArrayList <Pomieszczenie> listaHeatingLimit;
+        listaHeatingLimit = new Arraylist<>();
+
+        for (Poziom poziom : listaPoziomow) {
+            for (Pomieszczenie pomieszczenie : poziom.getListaPomieszczen()) {
+                if (pomieszczenie.getHeatingPerCubicMeter() > limit)
+                    listaHeatingLimit.add(pomieszczenie);
+            }
+        }
+        return listaHeatingLimit;
+    }
+
+    /**
+     *
      * @return the number representing proportion of the lighting power to the area of the building
      */
     public double getLightPerSquareMeter() {

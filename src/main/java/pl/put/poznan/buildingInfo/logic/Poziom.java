@@ -149,4 +149,5 @@ public class Poziom extends Lokalizacja {
     public double getHeatingPerCubicMeter() {
         return getHeating() / getCube();
     }
+
 }
