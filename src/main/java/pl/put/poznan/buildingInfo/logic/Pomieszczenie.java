@@ -2,10 +2,12 @@ package pl.put.poznan.buildingInfo.logic;
 
 import pl.put.poznan.buildingInfo.logic.Lokalizacja;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Class Pomieszczenie represents class Lokalizacja with additional double typu attributes such as
+ * Class Pomieszczenie represents class Lokalizacja with additional double type attributes such as
  * area, cube, heating and light
  */
 public class Pomieszczenie extends Lokalizacja{
@@ -14,6 +16,7 @@ public class Pomieszczenie extends Lokalizacja{
     private double heating;
     private double light;
     private Date dataRemontu;
+    private ArrayList <Okno> listaOkien;
 
     public Pomieszczenie() {
         super();
@@ -22,6 +25,7 @@ public class Pomieszczenie extends Lokalizacja{
         this.heating = 0.0;
         this.light = 0.0;
         this.dataRemontu = new Date();
+        this.listaOkien = new ArrayList<>();
     }
 
     /**
@@ -42,6 +46,7 @@ public class Pomieszczenie extends Lokalizacja{
         this.heating = heating;
         this.light = light;
         this.dataRemontu = new Date();
+        this.listaOkien = new ArrayList<>();
     }
 
     /**
@@ -63,6 +68,30 @@ public class Pomieszczenie extends Lokalizacja{
         this.heating = heating;
         this.light = light;
         this.dataRemontu = dataRemontu;
+        this.listaOkien = new ArrayList<>();
+    }
+
+    /**
+     *
+     * @param id variable inherited from the class Lokalizacja
+     *           here is passed to the Costructor method of the class Pomieszczenie
+     * @param nazwa variable inherited from the class Lokalizacja
+     *              here is passed to the Costructor method of the class Pomieszczenie
+     * @param area variable represents the area of the room
+     * @param cube variable represents the volume of the room
+     * @param heating variable represents the energy consumption [kWh] for heating the room per year
+     * @param light variable represents the total lighting power [W] in the room
+     * @param dataRemontu is the date when the last renovation of the room was made
+     * @param listaOkien is the list containing all the windows in the room
+     */
+    public Pomieszczenie(int id, String nazwa, Date dataRemontu, ArrayList<Okno> listaOkien, double area, double cube, double heating, double light) {
+        super(id, nazwa);
+        this.area = area;
+        this.cube = cube;
+        this.heating = heating;
+        this.light = light;
+        this.dataRemontu = dataRemontu;
+        this.listaOkien = listaOkien;
     }
 
     /**
@@ -79,6 +108,7 @@ public class Pomieszczenie extends Lokalizacja{
                 ", heating=" + heating +
                 ", light=" + light +
                 ", dataRemontu=" + dataRemontu +
+                ", listaOkien=" + listaOkien +
                 '}';
     }
 
@@ -170,9 +200,43 @@ public class Pomieszczenie extends Lokalizacja{
 
     /**
      *
+     * @return the list listaOkien
+     */
+    public ArrayList<Okno> getListaOkien() {
+        return listaOkien;
+    }
+
+    /**
+     *
+     * @param listaOkien the same as described above, but here is passed to the setListaOkien method,
+     *                   so we can set values of the list listaOkien
+     */
+    public void setListaOkien(ArrayList<Okno> listaOkien) {
+        this.listaOkien = listaOkien;
+    }
+
+    /**
+     *
+     * @return the sum of Building's windows areas from the room (describes the total windows area of the room)
+     */
+    public double getPowierzchniaOkien() {
+        double powierzchnia = 0;
+
+        for(Okno okno : listaOkien) {
+            powierzchnia += okno.getPowierzchnia();
+        }
+
+        return powierzchnia;
+    }
+    /**
+     *
      * @return the number representing proportion of the lighting power to the area of the room
      */
     public double getLightPerSquareMeter() {
+        if(getArea() == 0) {
+            return 0;
+        }
+
         return getLight() / getArea();
     }
 
@@ -181,6 +245,11 @@ public class Pomieszczenie extends Lokalizacja{
      * @return the number representing proportion of the energy consumption for heating to the volume of the room
      */
     public double getHeatingPerCubicMeter() {
+        if(getCube() == 0) {
+            return 0;
+        }
+
         return getHeating() / getCube();
     }
+
 }

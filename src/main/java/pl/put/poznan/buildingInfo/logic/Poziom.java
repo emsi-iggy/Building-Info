@@ -123,8 +123,13 @@ public class Poziom extends Lokalizacja {
      * It is the date of last renovation of any room at this floor.
      */
     public Date getDataRemontu() {
-        Date dataRemontu = new Date();
+        Date dataRemontu;
 
+        if((listaPomieszczen == null) || (listaPomieszczen.size() == 0)) {
+            return null;
+        }
+
+        dataRemontu = listaPomieszczen.get(0).getDataRemontu();
         for(Pomieszczenie pomieszczenie : listaPomieszczen) {
             if(dataRemontu.after( pomieszczenie.getDataRemontu() )) {
                 dataRemontu = pomieszczenie.getDataRemontu();
@@ -136,10 +141,45 @@ public class Poziom extends Lokalizacja {
 
     /**
      *
+     * @return the sum of Building's windows areas from all rooms (describes the total windows area of the floor)
+     */
+    public double getPowierzchniaOkien() {
+        double powierzchnia = 0;
+
+        for(Pomieszczenie pomieszczenie : listaPomieszczen) {
+            powierzchnia += pomieszczenie.getPowierzchniaOkien();
+        }
+
+        return powierzchnia;
+    }
+
+    /**
+     *
+     * @return the number of windows in the floor (describes the total number of windows in all rooms)
+     */
+    public int getLiczbaOkien() {
+        int liczbaOkien = 0;
+
+        for(Pomieszczenie pomieszczenie : listaPomieszczen) {
+            liczbaOkien += pomieszczenie.getListaOkien().size();
+        }
+
+        return liczbaOkien;
+    }
+
+    /**
+     *
      * @return the number representing proportion of the lighting power to the area of the floor
      */
     public double getLightPerSquareMeter() {
-        return getLight() / getArea();
+        double powierzchnia;
+
+        powierzchnia = getArea();
+        if(powierzchnia == 0) {
+            return 0;
+        }
+
+        return getLight() / powierzchnia;
     }
 
     /**
@@ -147,7 +187,14 @@ public class Poziom extends Lokalizacja {
      * @return the number representing proportion of the energy consumption for heating to the volume of the floor
      */
     public double getHeatingPerCubicMeter() {
-        return getHeating() / getCube();
+        double kubatura;
+
+        kubatura = getCube();
+        if(kubatura == 0) {
+            return 0;
+        }
+
+        return getHeating() / kubatura;
     }
 
 }

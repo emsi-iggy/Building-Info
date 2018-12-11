@@ -122,8 +122,13 @@ public class Budynek extends Lokalizacja{
      * It is the date of last renovation of any floor in this building.
      */
     public Date getDataRemontu() {
-        Date dataRemontu = new Date();
+        Date dataRemontu;
 
+        if((listaPoziomow == null) || (listaPoziomow.size() == 0)) {
+            return null;
+        }
+
+        dataRemontu = listaPoziomow.get(0).getDataRemontu();
         for(Poziom poziom : listaPoziomow) {
             if(dataRemontu.after( poziom.getDataRemontu() )) {
                 dataRemontu = poziom.getDataRemontu();
@@ -135,32 +140,30 @@ public class Budynek extends Lokalizacja{
 
     /**
      *
-     * @return
-     *
+     * @return the sum of Building's windows areas from all floors (describes the total windows area of the building)
      */
-    public Date getDataRemontu() {
-        Date dataRemontu = new Date();
+    public double getPowierzchniaOkien() {
+        double powierzchnia = 0;
 
         for(Poziom poziom : listaPoziomow) {
-            if(dataRemontu.after( poziom.getDataRemontu() )) {
-                dataRemontu = poziom.getDataRemontu();
-            }
+            powierzchnia += poziom.getPowierzchniaOkien();
         }
 
-        return dataRemontu;
+        return powierzchnia;
     }
 
-    public ArrayList<Pomieszczenie> getHeatingLimit(double limit) {
-        ArrayList <Pomieszczenie> listaHeatingLimit;
-        listaHeatingLimit = new Arraylist<>();
+    /**
+     *
+     * @return the number of windows in the building (describes the total number of windows in all floors)
+     */
+    public int getLiczbaOkien() {
+        int liczbaOkien = 0;
 
-        for (Poziom poziom : listaPoziomow) {
-            for (Pomieszczenie pomieszczenie : poziom.getListaPomieszczen()) {
-                if (pomieszczenie.getHeatingPerCubicMeter() > limit)
-                    listaHeatingLimit.add(pomieszczenie);
-            }
+        for(Poziom poziom : listaPoziomow) {
+            liczbaOkien += poziom.getLiczbaOkien();
         }
-        return listaHeatingLimit;
+
+        return liczbaOkien;
     }
 
     /**
@@ -168,7 +171,14 @@ public class Budynek extends Lokalizacja{
      * @return the number representing proportion of the lighting power to the area of the building
      */
     public double getLightPerSquareMeter() {
-        return getLight() / getArea();
+        double powierzchnia;
+
+        powierzchnia = getArea();
+        if(powierzchnia == 0) {
+            return 0;
+        }
+
+        return getLight() / powierzchnia;
     }
 
     /**
@@ -176,6 +186,13 @@ public class Budynek extends Lokalizacja{
      * @return the number representing proportion of the energy consumption for heating to the volume of the building
      */
     public double getHeatingPerCubicMeter() {
-        return getHeating() / getCube();
+        double kubatura;
+
+        kubatura = getCube();
+        if(kubatura == 0) {
+            return 0;
+        }
+
+        return getHeating() / kubatura;
     }
 }
