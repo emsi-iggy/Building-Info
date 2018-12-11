@@ -5,6 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.buildingInfo.logic.*;
+
+import java.util.ArrayList;
+
 import static pl.put.poznan.buildingInfo.app.buildingInfoApplication.listaBudynkow;
 
 @RestController //wpisz w przegladarke: localhost:8080/wyswietl
@@ -240,6 +243,48 @@ public class buildingInfoController {
         if(!czyJestIndeksPomieszczenia) return "Podano nieprawidłowy indeks pomieszczenia (indeks budynku i indeks poziomu są poprawne)";
         return "Podano niepoprawną ścieżkę dotyczącą wyświetlania danych (indeks budynku, indeks poziomu i indeks pomieszczenia są poprawne)";
     }
+
+    @RequestMapping(value="/s/{sprawdz}/{indeksBudynku}/{limit}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    public String wyswietlKonkretnePomieszczenie(@PathVariable("sprawdz") String sprawdz,
+                                                 @PathVariable("indeksBudynku") int indeksBudynku,
+                                                 @PathVariable("limit") double limit) {
+
+        boolean czyJestIndeksBudynku = false;
+        for(Budynek budynek : listaBudynkow) {
+            if(budynek.getId()==indeksBudynku) {
+                czyJestIndeksBudynku = true;
+                break;
+            }
+        }
+
+
+
+        if(czyJestIndeksBudynku) {
+            // log the parameters
+            logger.debug(sprawdz);
+            logger.debug(Integer.toString(indeksBudynku));
+            logger.debug(Double.toString(limit));
+
+            //funkcja zwracajaca pomieszczenia, ktore przekracaja limity
+            if (sprawdz.equals("limitEnergiiCieplnej")) {
+                ArrayList <Pomieszczenie> listaPomieszczen = listaBudynkow.get(indeksBudynku).getHeatingLimit(limit);
+                String wynik;
+                wynik = "Pomieszczenia, ktore przekracaja limit zuzycia energii cieplnej w budynku \"" + listaBudynkow.get(indeksBudynku).getNazwa() + "\":";
+
+                for(Pomieszczenie pomieszczenie : listaPomieszczen) {
+                    wynik += "\n\t" + pomieszczenie.getNazwa() + " - " + pomieszczenie.getHeatingPerCubicMeter();
+                }
+                return wynik;
+            } else if (sprawdz.equals("limitMocyOswietleniowej")) {
+                //return "Pomieszczenia, ktore przekracaja limit mocy oswietleniowej " + listaBudynkow.get(indeksBudynku).getNazwa() + ": "
+                  //      + listaBudynkow.get(indeksBudynku).getHeatingLimit(limit);
+                //Krzychu przerob
+            }
+        }
+        else return "Podano nieprawidlowy indeks budynku";
+        return "Podano niepoprawna sciezke dotyczaca wyswietlania danych (indeks budynku, indeks poziomu i indeks pomieszczenia sa poprawne)";
+    }
+
 
 
 /* KOD Z TRASNFORMERA:
