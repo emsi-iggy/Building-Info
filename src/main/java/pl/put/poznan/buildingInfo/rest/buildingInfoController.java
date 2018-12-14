@@ -278,7 +278,7 @@ public class buildingInfoController {
             } else if (sprawdz.equals("limitMocyOswietleniowej")) {
                 ArrayList <Pomieszczenie> listaPomieszczen = listaBudynkow.get(indeksBudynku).getLightLimit(limit);
                 String wynik;
-                wynik = "Pomieszczenia, ktore przekracaja limit zuzycia energii cieplnej w budynku \"" + listaBudynkow.get(indeksBudynku).getNazwa() + "\":";
+                wynik = "Pomieszczenia, ktore przekracaja limit mocy oswietleniowej w budynku \"" + listaBudynkow.get(indeksBudynku).getNazwa() + "\":";
 
                 for(Pomieszczenie pomieszczenie : listaPomieszczen) {
                     wynik += "\n\t" + pomieszczenie.getNazwa() + " - " + pomieszczenie.getLightPerSquareMeter();
