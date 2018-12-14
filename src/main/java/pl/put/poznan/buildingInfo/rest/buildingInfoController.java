@@ -276,9 +276,14 @@ public class buildingInfoController {
                 }
                 return wynik;
             } else if (sprawdz.equals("limitMocyOswietleniowej")) {
-                //return "Pomieszczenia, ktore przekracaja limit mocy oswietleniowej " + listaBudynkow.get(indeksBudynku).getNazwa() + ": "
-                  //      + listaBudynkow.get(indeksBudynku).getHeatingLimit(limit);
-                //Krzychu przerob
+                ArrayList <Pomieszczenie> listaPomieszczen = listaBudynkow.get(indeksBudynku).getLightLimit(limit);
+                String wynik;
+                wynik = "Pomieszczenia, ktore przekracaja limit zuzycia energii cieplnej w budynku \"" + listaBudynkow.get(indeksBudynku).getNazwa() + "\":";
+
+                for(Pomieszczenie pomieszczenie : listaPomieszczen) {
+                    wynik += "\n\t" + pomieszczenie.getNazwa() + " - " + pomieszczenie.getLightPerSquareMeter();
+                }
+                return wynik;
             }
         }
         else return "Podano nieprawidlowy indeks budynku";

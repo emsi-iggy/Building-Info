@@ -193,6 +193,20 @@ public class Budynek extends Lokalizacja{
         }
         return listaHeatingLimit;
     }
+
+    public ArrayList <Pomieszczenie> getLightLimit(double limit) {
+        ArrayList<Pomieszczenie> listaLightLimit;
+        listaLightLimit = new ArrayList<>();
+
+        for (Poziom poziom : listaPoziomow) {
+            for (Pomieszczenie pomieszczenie : poziom.getListaPomieszczen()) {
+                if (pomieszczenie.getLightPerSquareMeter() > limit)
+                    listaLightLimit.add(pomieszczenie);
+            }
+        }
+        return listaLightLimit;
+    }
+
     /**
      *
      * @return the number representing proportion of the energy consumption for heating to the volume of the building
