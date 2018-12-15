@@ -34,7 +34,7 @@ public class buildingInfoController {
         return "";
     }
 
-    @RequestMapping(value="/w/{wyswietl}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @RequestMapping(value="/w/{wyswietl}",method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
     public String wyswietlWszystko(@PathVariable("wyswietl") String wyswietl) {
         if(wyswietl.equals("powierzchnia")) {
 
@@ -52,7 +52,7 @@ public class buildingInfoController {
         return "Na razie ta metoda nic nie robi";
     }
 
-    @RequestMapping(value="/w/{wyswietl}/{indeksBudynku}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @RequestMapping(value="/w/{wyswietl}/{indeksBudynku}",method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
     public String wyswietlKonkretnyBudynek(@PathVariable("wyswietl") String wyswietl,@PathVariable("indeksBudynku") int indeksBudynku) {
         boolean czyJestIndeksBudynku = false;
         for(Budynek budynek : listaBudynkow) {
@@ -90,7 +90,7 @@ public class buildingInfoController {
         return "Podano niepoprawną ścieżkę dotyczącą wyświetlania danych (indeks budynku jest poprawny)";
     }
 
-    @RequestMapping(value="/w/{wyswietl}/{indeksBudynku}/{indeksPoziomu}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @RequestMapping(value="/w/{wyswietl}/{indeksBudynku}/{indeksPoziomu}",method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
     public String wyswietlKonkretnnyPoziom(@PathVariable("wyswietl") String wyswietl, @PathVariable("indeksBudynku") int indeksBudynku,
                                            @PathVariable("indeksPoziomu") int indeksPoziomu) {
 
@@ -157,7 +157,7 @@ public class buildingInfoController {
         return "Podano niepoprawną ścieżkę dotyczącą wyświetlania danych (indeks budynku i indeks poziomu są poprawne)";
     }
 
-    @RequestMapping(value="/w/{wyswietl}/{indeksBudynku}/{indeksPoziomu}/{indeksPomieszczenia}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @RequestMapping(value="/w/{wyswietl}/{indeksBudynku}/{indeksPoziomu}/{indeksPomieszczenia}",method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
     public String wyswietlKonkretnePomieszczenie(@PathVariable("wyswietl") String wyswietl,
                                                  @PathVariable("indeksBudynku") int indeksBudynku, @PathVariable("indeksPoziomu") int indeksPoziomu,
                                            @PathVariable("indeksPomieszczenia") int indeksPomieszczenia) {
@@ -244,7 +244,7 @@ public class buildingInfoController {
         return "Podano niepoprawną ścieżkę dotyczącą wyświetlania danych (indeks budynku, indeks poziomu i indeks pomieszczenia są poprawne)";
     }
 
-    @RequestMapping(value="/s/{sprawdz}/{indeksBudynku}/{limit}",method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @RequestMapping(value="/s/{sprawdz}/{indeksBudynku}/{limit}",method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
     public String wyswietlKonkretnePomieszczenie(@PathVariable("sprawdz") String sprawdz,
                                                  @PathVariable("indeksBudynku") int indeksBudynku,
                                                  @PathVariable("limit") double limit) {
