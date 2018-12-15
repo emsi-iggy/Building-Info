@@ -13,6 +13,9 @@ import java.util.Date;
 import static pl.put.poznan.buildingInfo.logic.Okno.RodzajOknaPCV;
 import static pl.put.poznan.buildingInfo.logic.Okno.SposobOtwarciaOkna;
 
+/**
+ * This is the test class for class Poziom, which mainly tests the boundary conditions of the class.
+ */
 public class PoziomTest {
     private Okno okno[];
     private ArrayList<Okno> listaOkien;
@@ -20,6 +23,10 @@ public class PoziomTest {
     private ArrayList<Pomieszczenie> listaPomieszczen;
     private Poziom poziom;
 
+    /**
+     * Set values before the test execution.
+     * There is set of 10 objects of class Pomieszczenie.
+     */
     @Before
     public void setUp() {
         okno = new Okno[6];
@@ -87,6 +94,9 @@ public class PoziomTest {
         pomieszczenie[9] = new Pomieszczenie(9, "Pokój 9", new Date(112, 5, 29), listaOkien, 20, 50, 5000, 75);
     }
 
+    /**
+     * Clean up after the test execution.
+     */
     @After
     public void tearDown() {
         listaOkien = null;
@@ -96,6 +106,10 @@ public class PoziomTest {
         poziom = null;
     }
 
+    /**
+     * Check if the value returned by the method getArea in class Poziom
+     * is correct when the empty list of the class Pomieszczenie is set.
+     */
     @Test
     public void testGetArea_brakPomieszczen() {
         listaPomieszczen = new ArrayList<>();
@@ -104,6 +118,10 @@ public class PoziomTest {
         assertEquals(0, poziom.getArea(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getArea in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
+     */
     @Test
     public void testGetArea_jednoPomieszczenie() {
         listaPomieszczen = new ArrayList<>();
@@ -113,6 +131,10 @@ public class PoziomTest {
         assertEquals(10, poziom.getArea(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getArea in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
+     */
     @Test
     public void testGetArea_wielePomieszczen() {
         listaPomieszczen = new ArrayList<>();
@@ -124,6 +146,10 @@ public class PoziomTest {
         assertEquals(40, poziom.getArea(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getCube in class Poziom
+     * is correct when the empty list of the class Pomieszczenie is set.
+     */
     @Test
     public void testGetCube_brakPomieszczen() {
         listaPomieszczen = new ArrayList<>();
@@ -132,6 +158,10 @@ public class PoziomTest {
         assertEquals(0, poziom.getCube(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getCube in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
+     */
     @Test
     public void testGetCube_jednoPomieszczenie() {
         listaPomieszczen = new ArrayList<>();
@@ -141,6 +171,10 @@ public class PoziomTest {
         assertEquals(25, poziom.getCube(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getCube in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
+     */
     @Test
     public void testGetCube_wielePomieszczen() {
         listaPomieszczen = new ArrayList<>();
@@ -152,6 +186,10 @@ public class PoziomTest {
         assertEquals(100, poziom.getCube(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getLight in class Poziom
+     * is correct when the empty list of the class Pomieszczenie is set.
+     */
     @Test
     public void testGetLight_brakPomieszczen() {
         listaPomieszczen = new ArrayList<>();
@@ -160,6 +198,10 @@ public class PoziomTest {
         assertEquals(0, poziom.getLight(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getLight in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
+     */
     @Test
     public void testGetLight_jednoPomieszczenie() {
         listaPomieszczen = new ArrayList<>();
@@ -169,6 +211,10 @@ public class PoziomTest {
         assertEquals(80, poziom.getLight(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getLight in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
+     */
     @Test
     public void testGetLight_wielePomieszczen() {
         listaPomieszczen = new ArrayList<>();
@@ -180,6 +226,10 @@ public class PoziomTest {
         assertEquals(190, poziom.getLight(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getHeating in class Poziom
+     * is correct when the empty list of the class Pomieszczenie is set.
+     */
     @Test
     public void testGetHeating_brakPomieszczen() {
         listaPomieszczen = new ArrayList<>();
@@ -188,6 +238,10 @@ public class PoziomTest {
         assertEquals(0, poziom.getHeating(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getHeating in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
+     */
     @Test
     public void testGetHeating_jednoPomieszczenie() {
         listaPomieszczen = new ArrayList<>();
@@ -197,6 +251,10 @@ public class PoziomTest {
         assertEquals(7000, poziom.getHeating(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getHeating in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
+     */
     @Test
     public void testGetHeating_wielePomieszczen() {
         listaPomieszczen = new ArrayList<>();
@@ -208,14 +266,22 @@ public class PoziomTest {
         assertEquals(30000, poziom.getHeating(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getDataRemontu in class Poziom
+     * is correct when the empty list of the class Pomieszczenie is set.
+     */
     @Test
     public void testGetDataRemontu_brakPomieszczen() {
         listaPomieszczen = new ArrayList<>();
         poziom = new Poziom(0, "Pusty poziom", listaPomieszczen);
 
-        assertEquals(null, poziom.getDataRemontu());
+        assertNull(poziom.getDataRemontu());
     }
 
+    /**
+     * Check if the value returned by the method getDataRemontu in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
+     */
     @Test
     public void testGetDataRemontu_jednoPomieszczenie() {
         listaPomieszczen = new ArrayList<>();
@@ -225,6 +291,10 @@ public class PoziomTest {
         assertEquals(new Date(115, 8, 25), poziom.getDataRemontu());
     }
 
+    /**
+     * Check if the value returned by the method getDataRemontu in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
+     */
     @Test
     public void testGetDataRemontu_wielePomieszczen() {
         listaPomieszczen = new ArrayList<>();
@@ -236,6 +306,10 @@ public class PoziomTest {
         assertEquals(new Date(101, 7, 30), poziom.getDataRemontu());
     }
 
+    /**
+     * Check if the value returned by the method getPowierzchniaOkien in class Poziom
+     * is correct when the empty list of the class Pomieszczenie is set.
+     */
     @Test
     public void testGetPowierzchniaOkien_brakPomieszczen() {
         listaPomieszczen = new ArrayList<>();
@@ -244,6 +318,11 @@ public class PoziomTest {
         assertEquals(0, poziom.getPowierzchniaOkien(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getPowierzchniaOkien in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
+     * This object of the class Pomieszczenie hasn't got any objects of the class Okno.
+     */
     @Test
     public void testGetPowierzchniaOkien_jednoPomieszczenie_BrakOkien() {
         listaPomieszczen = new ArrayList<>();
@@ -253,6 +332,11 @@ public class PoziomTest {
         assertEquals(0, poziom.getPowierzchniaOkien(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getPowierzchniaOkien in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
+     * This object of the class Pomieszczenie has got only the one object of the class Okno.
+     */
     @Test
     public void testGetPowierzchniaOkien_jednoPomieszczenie_JednoOkno() {
         listaPomieszczen = new ArrayList<>();
@@ -262,6 +346,11 @@ public class PoziomTest {
         assertEquals(1.3, poziom.getPowierzchniaOkien(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getPowierzchniaOkien in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
+     * This object of the class Pomieszczenie has got many objects of the class Okno.
+     */
     @Test
     public void testGetPowierzchniaOkien_jednoPomieszczenie_WieleOkien() {
         listaPomieszczen = new ArrayList<>();
@@ -271,6 +360,10 @@ public class PoziomTest {
         assertEquals(3.6, poziom.getPowierzchniaOkien(), 0.1);
     }
 
+    /**
+     * Check if the value returned by the method getPowierzchniaOkien in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
+     */
     @Test
     public void testGetPowierzchniaOkien_wielePomieszczen() {
         listaPomieszczen = new ArrayList<>();
@@ -282,6 +375,10 @@ public class PoziomTest {
         assertEquals(4.225, poziom.getPowierzchniaOkien(), 0.001);
     }
 
+    /**
+     * Check if the value returned by the method getLiczbaOkien in class Poziom
+     * is correct when the empty list of the class Pomieszczenie is set.
+     */
     @Test
     public void testGetLiczbaOkien_brakPomieszczen() {
         listaPomieszczen = new ArrayList<>();
@@ -290,6 +387,11 @@ public class PoziomTest {
         assertEquals(0, poziom.getLiczbaOkien());
     }
 
+    /**
+     * Check if the value returned by the method getLiczbaOkien in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
+     * This object of the class Pomieszczenie hasn't got any objects of the class Okno.
+     */
     @Test
     public void testGetLiczbaOkien_jednoPomieszczenie_BrakOkien() {
         listaPomieszczen = new ArrayList<>();
@@ -299,6 +401,11 @@ public class PoziomTest {
         assertEquals(0, poziom.getLiczbaOkien());
     }
 
+    /**
+     * Check if the value returned by the method getLiczbaOkien in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
+     * This object of the class Pomieszczenie has got only the one object of the class Okno.
+     */
     @Test
     public void testGetLiczbaOkien_jednoPomieszczenie_JednoOkno() {
         listaPomieszczen = new ArrayList<>();
@@ -308,6 +415,11 @@ public class PoziomTest {
         assertEquals(1, poziom.getLiczbaOkien());
     }
 
+    /**
+     * Check if the value returned by the method getLiczbaOkien in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
+     * This object of the class Pomieszczenie has got many objects of the class Okno.
+     */
     @Test
     public void testGetLiczbaOkien_jednoPomieszczenie_WieleOkien() {
         listaPomieszczen = new ArrayList<>();
@@ -317,6 +429,10 @@ public class PoziomTest {
         assertEquals(4, poziom.getLiczbaOkien());
     }
 
+    /**
+     * Check if the value returned by the method getLiczbaOkien in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
+     */
     @Test
     public void testGetLiczbaOkien_wielePomieszczen() {
         listaPomieszczen = new ArrayList<>();
@@ -328,6 +444,10 @@ public class PoziomTest {
         assertEquals(4, poziom.getLiczbaOkien());
     }
 
+    /**
+     * Check if the value returned by the method getLightPerSquareMeter in class Poziom
+     * is correct when the empty list of the class Pomieszczenie is set.
+     */
     @Test
     public void testGetLightPerSquareMeter_brakPomieszczen() {
         listaPomieszczen = new ArrayList<>();
@@ -336,6 +456,10 @@ public class PoziomTest {
         assertEquals(0, poziom.getLightPerSquareMeter(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getLightPerSquareMeter in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
+     */
     @Test
     public void testGetLightPerSquareMeter_jednoPomieszczenie() {
         listaPomieszczen = new ArrayList<>();
@@ -345,6 +469,10 @@ public class PoziomTest {
         assertEquals(4, poziom.getLightPerSquareMeter(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getLightPerSquareMeter in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
+     */
     @Test
     public void testGetLightPerSquareMeter_wielePomieszczen() {
         listaPomieszczen = new ArrayList<>();
@@ -356,6 +484,10 @@ public class PoziomTest {
         assertEquals(3.25, poziom.getLightPerSquareMeter(), 0.01);
     }
 
+    /**
+     * Check if the value returned by the method getHeatingPerCubicMeter in class Poziom
+     * is correct when the empty list of the class Pomieszczenie is set.
+     */
     @Test
     public void testGetHeatingPerCubicMeter_brakPomieszczen() {
         listaPomieszczen = new ArrayList<>();
@@ -364,6 +496,10 @@ public class PoziomTest {
         assertEquals(0, poziom.getHeatingPerCubicMeter(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getHeatingPerCubicMeter in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
+     */
     @Test
     public void testGetHeatingPerCubicMeter_jednoPomieszczenie() {
         listaPomieszczen = new ArrayList<>();
@@ -373,6 +509,10 @@ public class PoziomTest {
         assertEquals(440, poziom.getHeatingPerCubicMeter(), 0);
     }
 
+    /**
+     * Check if the value returned by the method getHeatingPerCubicMeter in class Poziom
+     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
+     */
     @Test
     public void testGetHeatingPerCubicMeter_wielePomieszczen() {
         listaPomieszczen = new ArrayList<>();
