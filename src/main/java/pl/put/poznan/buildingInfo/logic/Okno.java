@@ -1,7 +1,7 @@
 package pl.put.poznan.buildingInfo.logic;
 
 /**
- * Class Okno (window) is the addition to the class Lokalizacja with many double type and enum type attributes
+ * Class Okno (window) is the addition to the class Pomieszczenie with many double type and enum type attributes
  * such as area, width, height, price, type and type of opening the window
  */
 public class Okno {
