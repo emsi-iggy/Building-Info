@@ -9,12 +9,18 @@ import java.util.*;
 import static pl.put.poznan.buildingInfo.logic.Okno.RodzajOknaPCV.*;
 import static pl.put.poznan.buildingInfo.logic.Okno.SposobOtwarciaOkna.*;
 
+/**
+ * Class buildingInfoApplication is used to run our buildingInfo service.
+ */
 @SpringBootApplication(scanBasePackages = {"pl.put.poznan.buildingInfo.rest"})
-
 public class buildingInfoApplication {
+    /**
+     * The list of buildings with all collected data about them.
+     * That list is used to find any information required by the user.
+     */
     public static List <Budynek> listaBudynkow;
 
-    public static Budynek stworzBudynek2() {
+    private static Budynek stworzBudynek2() {
         Okno okno[] = new Okno[14];
         ArrayList <Okno> listaOkien;
         ArrayList <Pomieszczenie> listaPomieszczen;
@@ -130,6 +136,13 @@ public class buildingInfoApplication {
         return budynek;
     }
 
+    /**
+     * The main method, which is responsible for application working.
+     * There is prepared necessary information about buildings used while running application.
+     * After that, the SpringApplication is started.
+     *
+     * @param args is the typical array of arguments. Actually, it is only passed to the method run() of the class SpringApplication.
+     */
     public static void main(String[] args) {
         listaBudynkow = new ArrayList<>();
         JSONCreator kreator = new JSONCreator();
