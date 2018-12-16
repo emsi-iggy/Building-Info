@@ -233,7 +233,7 @@ public class Pomieszczenie extends Lokalizacja{
      *
      * @return the nubmer of Building's windows from the room (describes the total windows number of the room)
      */
-    public double getLiczbaOkien() {
+    public int getLiczbaOkien() {
         return listaOkien.size();
     }
 
