@@ -235,7 +235,7 @@ public class buildingInfoController {
                 return "Łączna liczba okien w pomieszczeniu " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getNazwa()
                         + " na poziomie " + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getNazwa()
                         + " w budynku " + listaBudynkow.get(indeksBudynku).getNazwa() + " = "
-                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getListaOkien().size();
+                        + listaBudynkow.get(indeksBudynku).getListaPoziomow().get(indeksPoziomu).getListaPomieszczen().get(indeksPomieszczenia).getLiczbaOkien();
             }
         }
         if(!czyJestIndeksBudynku) return "Podano nieprawidłowy indeks budynku";

@@ -228,6 +228,15 @@ public class Pomieszczenie extends Lokalizacja{
 
         return powierzchnia;
     }
+
+    /**
+     *
+     * @return the nubmer of Building's windows from the room (describes the total windows number of the room)
+     */
+    public double getLiczbaOkien() {
+        return listaOkien.size();
+    }
+
     /**
      *
      * @return the number representing proportion of the lighting power to the area of the room
