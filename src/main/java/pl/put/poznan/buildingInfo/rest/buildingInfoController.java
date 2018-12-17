@@ -11,10 +11,20 @@ import java.util.ArrayList;
 import static pl.put.poznan.buildingInfo.app.buildingInfoApplication.listaBudynkow;
 
 @RestController //wpisz w przegladarke: localhost:8080/wyswietl
+/**
+ * class buildingInfoController is used to create requests for the browser to retrieve
+ * the data from the application.
+ */
 public class buildingInfoController {
 
     private static final Logger logger = LoggerFactory.getLogger(pl.put.poznan.buildingInfo.rest.buildingInfoController.class);
 
+    /**
+     * In the future this method will add new Building object (where the data will be inserted as JSON Object)
+     * but this method isn't implemented yet.
+     * @param obiekt is the JSON Object which contains Building type data
+     * @return will print the success message in the future
+     */
     @RequestMapping(value="/dodaj",method= RequestMethod.POST, produces = "application/json", consumes = "application/json") // (wpisz w przegladarke: localhost:8080/cokolwiek/pomieszczenie)
     public String wyswietlWszystkiePomieszczenia(@RequestBody(required=false) JSONObject obiekt){
         if(obiekt.containsKey("Pomieszczenie")) {
@@ -34,6 +44,11 @@ public class buildingInfoController {
         return "";
     }
 
+    /**
+     * This method doesn't do anything yet
+     * @param wyswietl variable which doesn't represent anything yet
+     * @return the same as above (nothing yet)
+     */
     @RequestMapping(value="/w/{wyswietl}",method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
     public String wyswietlWszystko(@PathVariable("wyswietl") String wyswietl) {
         if(wyswietl.equals("powierzchnia")) {
@@ -52,6 +67,18 @@ public class buildingInfoController {
         return "Na razie ta metoda nic nie robi";
     }
 
+    /**
+     * Method wyswietlKonkretnyBudynek displays the data for the whole building according to the path which consists of
+     * constant 'w', parameter 'wyswietl' and parameter 'indeksBudynku'
+     * @param wyswietl can be one of the following: 'powierzchnia','kubatura','moc','energia','mocPerPowierzchnia',
+     *                 'energiaPerKubatura','dataRemontu','powierzchniaOkien','liczbaOkien'
+     * @param indeksBudynku represents the id of the building existing in the application
+     * @return the text representing the answer to the request consisting of 'wyswietl' (what to display - e.g.
+     * 'powierzchnia' displays the area of the whole building) and 'indeksBudynku' which tells the
+     * application from which building we want to get the data
+     * Furthermore the application can display appropriate information according to the wrong path
+     * e.g. 'Podano nieprawidłowy indeks budynku' which means 'Wrong value of the parameter indeksBudynku was given'
+     */
     @RequestMapping(value="/w/{wyswietl}/{indeksBudynku}",method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
     public String wyswietlKonkretnyBudynek(@PathVariable("wyswietl") String wyswietl,@PathVariable("indeksBudynku") int indeksBudynku) {
         boolean czyJestIndeksBudynku = false;
@@ -90,6 +117,20 @@ public class buildingInfoController {
         return "Podano niepoprawną ścieżkę dotyczącą wyświetlania danych (indeks budynku jest poprawny)";
     }
 
+    /**
+     * Method wyswietlKonkretnnyPoziom displays the data for the whole floor in the building according to the path
+     * which consists of constant 'w', parameter 'wyswietl', parameter 'indeksBudynku' and parameter 'indeksPoziomu'
+     * @param wyswietl can be one of the following: 'powierzchnia','kubatura','moc','energia','mocPerPowierzchnia',
+     *                 'energiaPerKubatura','dataRemontu','powierzchniaOkien','liczbaOkien'
+     * @param indeksBudynku represents the id of the building existing in the application
+     * @param indeksPoziomu represents the id of the floor existing in the building given by 'indeksBudynku'
+     * @return the text representing the answer to the request consisting of 'wyswietl' (what to display - e.g.
+     * 'powierzchnia' displays the area of the whole floor in the building), 'indeksBudynku' which tells the
+     * application from which building we want to get the data and 'indeksPoziomu' which tells from which floor
+     * we want to get the data
+     * Furthermore the application can display appropriate information according to the wrong path
+     * e.g. 'Podano nieprawidłowy indeks budynku' which means 'Wrong value of the parameter indeksBudynku was given'
+     */
     @RequestMapping(value="/w/{wyswietl}/{indeksBudynku}/{indeksPoziomu}",method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
     public String wyswietlKonkretnnyPoziom(@PathVariable("wyswietl") String wyswietl, @PathVariable("indeksBudynku") int indeksBudynku,
                                            @PathVariable("indeksPoziomu") int indeksPoziomu) {
@@ -157,6 +198,23 @@ public class buildingInfoController {
         return "Podano niepoprawną ścieżkę dotyczącą wyświetlania danych (indeks budynku i indeks poziomu są poprawne)";
     }
 
+    /**
+     * Method wyswietlKonkretnePomieszczenie displays the data for the room in the building according to the path
+     * which consists of constant 'w', parameter 'wyswietl', parameter 'indeksBudynku', parameter 'indeksPoziomu'
+     * and parameter 'indeksPomieszczenia'
+     * @param wyswietl can be one of the following: 'powierzchnia','kubatura','moc','energia','mocPerPowierzchnia',
+     *                 'energiaPerKubatura','dataRemontu','powierzchniaOkien','liczbaOkien'
+     * @param indeksBudynku represents the id of the building existing in the application
+     * @param indeksPoziomu represents the id of the floor existing in the building given by 'indeksBudynku'
+     * @param indeksPomieszczenia represents the id of the room existing in the building given by 'indeksBudynku'
+     *                            and in the floor given by 'indeksPoziomu'
+     * @return the text representing the answer to the request consisting of 'wyswietl' (what to display - e.g.
+     * 'powierzchnia' displays the area of the whole floor in the building), 'indeksBudynku' which tells the
+     * application from which building we want to get the data, 'indeksPoziomu' which tells from which floor
+     * we want to get the data and 'indeksPomieszczenia' which tells from which room we want to get the data
+     * Furthermore the application can display appropriate information according to the wrong path
+     * e.g. 'Podano nieprawidłowy indeks budynku' which means 'Wrong value of the parameter indeksBudynku was given'
+     */
     @RequestMapping(value="/w/{wyswietl}/{indeksBudynku}/{indeksPoziomu}/{indeksPomieszczenia}",method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
     public String wyswietlKonkretnePomieszczenie(@PathVariable("wyswietl") String wyswietl,
                                                  @PathVariable("indeksBudynku") int indeksBudynku, @PathVariable("indeksPoziomu") int indeksPoziomu,
@@ -244,6 +302,18 @@ public class buildingInfoController {
         return "Podano niepoprawną ścieżkę dotyczącą wyświetlania danych (indeks budynku, indeks poziomu i indeks pomieszczenia są poprawne)";
     }
 
+    /**
+     * Method wyswietlKonkretnePomieszczenie displays rooms exceeding the parameter 'limit' of the parameter 'sprawdz'
+     * The path consists of constant 's', parameter 'sprawdz', parameter 'indeksBudynku' and parameter 'limit'
+     * @param sprawdz can be one of the following: 'limitEnergiiCieplnej','limitMocyOswietleniowej'
+     * @param indeksBudynku represents the id of the building existing in the application
+     * @param limit is the value which rooms can exceed and then they are considered as return value
+     * @return the rooms exceeding 'limit' of 'sprawdz' e.g. rooms that have more
+     * energy consumption (sprawdz) than 5400 (limit)
+     * All of the rooms are inside the building identified by 'indeksBudynku'
+     * Furthermore the application can display appropriate information according to the wrong path
+     * e.g. 'Podano nieprawidłowy indeks budynku' which means 'Wrong value of the parameter indeksBudynku was given'
+     */
     @RequestMapping(value="/s/{sprawdz}/{indeksBudynku}/{limit}",method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
     public String wyswietlKonkretnePomieszczenie(@PathVariable("sprawdz") String sprawdz,
                                                  @PathVariable("indeksBudynku") int indeksBudynku,
