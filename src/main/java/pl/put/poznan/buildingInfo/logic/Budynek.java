@@ -218,7 +218,7 @@ public class Budynek extends Lokalizacja{
             }
         }
         return listaNaturalLightLimit;
-
+    }
     /**
      *
      * @return the number representing proportion of the energy consumption for heating to the volume of the building
