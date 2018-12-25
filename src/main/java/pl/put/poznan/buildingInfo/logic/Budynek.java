@@ -207,6 +207,18 @@ public class Budynek extends Lokalizacja{
         return listaLightLimit;
     }
 
+    public ArrayList <Pomieszczenie> getNaturalLightLimit(double limit) {
+        ArrayList<Pomieszczenie> listaNaturalLightLimit;
+        listaNaturalLightLimit = new ArrayList<>();
+
+        for (Poziom poziom : listaPoziomow) {
+            for (Pomieszczenie pomieszczenie : poziom.getListaPomieszczen()) {
+                if (pomieszczenie.getNaturalLight() < limit)
+                    listaNaturalLightLimit.add(pomieszczenie);
+            }
+        }
+        return listaNaturalLightLimit;
+
     /**
      *
      * @return the number representing proportion of the energy consumption for heating to the volume of the building

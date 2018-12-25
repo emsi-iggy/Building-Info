@@ -335,7 +335,7 @@ public class buildingInfoController {
             logger.debug(Integer.toString(indeksBudynku));
             logger.debug(Double.toString(limit));
 
-            //funkcja zwracajaca pomieszczenia, ktore przekracaja limity
+            //funkcja zwracajaca pomieszczenia
             if (sprawdz.equals("limitEnergiiCieplnej")) {
                 ArrayList <Pomieszczenie> listaPomieszczen = listaBudynkow.get(indeksBudynku).getHeatingLimit(limit);
                 String wynik;
@@ -354,6 +354,16 @@ public class buildingInfoController {
                     wynik += "\n\t" + pomieszczenie.getNazwa() + " - " + pomieszczenie.getLightPerSquareMeter();
                 }
                 return wynik;
+            } else if (sprawdz.equals("poziomWspolczynnikaNaswietlenia")) {
+                ArrayList <Pomieszczenie> listaPomieszczen = listaBudynkow.get(indeksBudynku).getNaturalLightLimit(limit);
+                String wynik;
+                wynik = "Pomieszczenia, ktore nie osiagaja okreslonego poziomu wspolczynnika oswietlenia naturalnego w budynku \"" + listaBudynkow.get(indeksBudynku).getNazwa() + "\":";
+
+                for(Pomieszczenie pomieszczenie : listaPomieszczen) {
+                    wynik += "\n\t" + pomieszczenie.getNazwa() + " - " + pomieszczenie.getNaturaLight();
+                }
+                return wynik;
+
             }
         }
         else return "Podano nieprawidlowy indeks budynku";
