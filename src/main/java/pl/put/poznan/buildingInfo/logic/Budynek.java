@@ -181,6 +181,21 @@ public class Budynek extends Lokalizacja{
         return getLight() / powierzchnia;
     }
 
+    /**
+     *
+     * @return the number representing proportion of the energy consumption for heating to the volume of the building
+     */
+    public double getHeatingPerCubicMeter() {
+        double kubatura;
+
+        kubatura = getCube();
+        if(kubatura == 0) {
+            return 0;
+        }
+
+        return getHeating() / kubatura;
+    }
+
     public ArrayList <Pomieszczenie> getHeatingLimit(double limit) {
         ArrayList<Pomieszczenie> listaHeatingLimit;
         listaHeatingLimit = new ArrayList<>();
@@ -219,18 +234,17 @@ public class Budynek extends Lokalizacja{
         }
         return listaNaturalLightLimit;
     }
-    /**
-     *
-     * @return the number representing proportion of the energy consumption for heating to the volume of the building
-     */
-    public double getHeatingPerCubicMeter() {
-        double kubatura;
 
-        kubatura = getCube();
-        if(kubatura == 0) {
-            return 0;
+    public ArrayList <Pomieszczenie> getDataRemontuLimit(Date limit) {
+        ArrayList<Pomieszczenie> listaDataRemontuLimit;
+        listaDataRemontuLimit = new ArrayList<>();
+
+        for (Poziom poziom : listaPoziomow) {
+            for (Pomieszczenie pomieszczenie : poziom.getListaPomieszczen()) {
+                if (pomieszczenie.getDataRemontu().before(limit))
+                    listaDataRemontuLimit.add(pomieszczenie);
+            }
         }
-
-        return getHeating() / kubatura;
+        return listaDataRemontuLimit;
     }
 }

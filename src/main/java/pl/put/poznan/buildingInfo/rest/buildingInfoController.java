@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.buildingInfo.logic.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import static pl.put.poznan.buildingInfo.app.buildingInfoApplication.listaBudynkow;
 
@@ -368,6 +369,61 @@ public class buildingInfoController {
         }
         else return "Podano nieprawidlowy indeks budynku";
         return "Podano niepoprawna sciezke dotyczaca wyswietlania danych (indeks budynku, indeks poziomu i indeks pomieszczenia sa poprawne)";
+    }
+
+    /**
+     * Method wyswietlKonkretnePomieszczenieDoRemontu displays rooms exceeding the parameter 'year-month-day' limit of the parameter 'sprawdz'
+     * The path consists of constant 's', parameter 'sprawdz', parameter 'indeksBudynku' and parameters 'rok', 'miesiac', 'dzien'
+     * @param sprawdz can be one of the following: 'limitDatyRemontu'
+     * @param indeksBudynku represents the id of the building existing in the application
+     * @param rok is the year of given date limit
+     * @param miesiac is the month of given date limit
+     * @param dzien is the day of given date limit
+     * @return the rooms exceeding limit of 'sprawdz' e.g. rooms that haven't been renovating (sprawdz) since given date 2005-06-20 (limit year-month-day)
+     * All of the rooms are inside the building identified by 'indeksBudynku'
+     * Furthermore the application can display appropriate information according to the wrong path
+     * e.g. 'Podano nieprawidłowy indeks budynku' which means 'Wrong value of the parameter indeksBudynku was given'
+     */
+    @RequestMapping(value="/s/{sprawdz}/{indeksBudynku}/{rok}/{miesiac}/{dzien}",method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
+    public String wyswietlKonkretnePomieszczenieLimitDaty(@PathVariable("sprawdz") String sprawdz,
+                                                          @PathVariable("indeksBudynku") int indeksBudynku,
+                                                          @PathVariable("rok") int rok,
+                                                          @PathVariable("miesiac") int miesiac,
+                                                          @PathVariable("dzien") int dzien) {
+
+        boolean czyJestIndeksBudynku = false;
+        for(Budynek budynek : listaBudynkow) {
+            if(budynek.getId()==indeksBudynku) {
+                czyJestIndeksBudynku = true;
+                break;
+            }
+        }
+
+
+
+        if(czyJestIndeksBudynku) {
+            // log the parameters
+            logger.debug(sprawdz);
+            logger.debug(Integer.toString(indeksBudynku));
+            logger.debug(Integer.toString(rok));
+            logger.debug(Integer.toString(miesiac));
+            logger.debug(Integer.toString(dzien));
+
+            //funkcja zwracajaca pomieszczenia
+            if (sprawdz.equals("limitDatyRemontu")) {
+                Date limitDaty = new Date(rok - 1900, miesiac - 1, dzien);
+                ArrayList <Pomieszczenie> listaPomieszczen = listaBudynkow.get(indeksBudynku).getDataRemontuLimit(limitDaty);
+                String wynik;
+                wynik = "Pomieszczenia, ktore nie zostaly remontowane od czasu " + limitDaty.toString() + " w budynku \"" + listaBudynkow.get(indeksBudynku).getNazwa() + "\":";
+
+                for(Pomieszczenie pomieszczenie : listaPomieszczen) {
+                    wynik += "\n\t" + pomieszczenie.getNazwa() + " - " + pomieszczenie.getHeatingPerCubicMeter();
+                }
+                return wynik;
+            }
+        }
+        else return "Podano nieprawidlowy indeks budynku";
+        return "Podano niepoprawna sciezke dotyczaca wyswietlania danych (indeks budynku jest poprawny)";
     }
 
 
