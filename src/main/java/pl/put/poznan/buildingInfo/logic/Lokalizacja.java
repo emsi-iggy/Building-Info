@@ -3,24 +3,29 @@ package pl.put.poznan.buildingInfo.logic;
 import java.util.Date;
 
 /**
- * Class Lokalizacja represents building (Budynek), floor (Poziom) or room (Pomieszczenie)
+ * Abstract class {@link Lokalizacja} represents building ({@link Budynek}), floor ({@link Poziom}) or room ({@link Pomieszczenie})
  */
 public abstract class Lokalizacja {
     private int id;
     private String nazwa;
 
-
+    /**
+     * This is an empty constructor of the {@link Lokalizacja} which allows to set the basic properties of the object
+     * to the default null values.
+     */
     public Lokalizacja() {
         this.id = 0;
         this.nazwa = "";
     }
 
     /**
+     * This is a constructor of the {@link Lokalizacja} which allows to set the basic properties of the object
+     * with given parameters values.
      *
-     * @param id is an identifier which is unique for each instance of the class Lokalizacja (location),
-     *           here is passed to the Costructor method of the class Lokalizacja
+     * @param id is an identifier which is unique for each instance of the class {@link Lokalizacja} (location),
+     *           here is passed to the constructor method of the class {@link Lokalizacja}
      * @param nazwa is the user-friendly variable which contains the name of the location,
-     *              here is passed to the Constructor method of the class Lokalizacja
+     *              here is passed to the constructor method of the class {@link Lokalizacja}
      */
     public Lokalizacja(int id, String nazwa) {
         this.id = id;
@@ -28,6 +33,7 @@ public abstract class Lokalizacja {
     }
 
     /**
+     * This is an overridden method toString. It allows to print on the screen basic info about an object of the {@link Lokalizacja}
      *
      * @return the String containing names of variables and their values
      */
@@ -40,38 +46,38 @@ public abstract class Lokalizacja {
     }
 
     /**
+     * Gets the value of the private field {@code id}. It is an identifier which is unique for each instance of the class {@link Lokalizacja} (location).
      *
      * @return the variable id
      */
-
     public int getId() {
         return id;
     }
 
     /**
+     * Sets the value of the private field {@code id}. It is an identifier which is unique for each instance of the class {@link Lokalizacja} (location).
      *
      * @param id the same as described above, but here is passed to the setId method so we can change to the other id
      */
-
     public void setId(int id) {
         this.id = id;
     }
 
     /**
+     * Gets the value of the private field {@code nazwa}. It is the user-friendly variable which contains the name of the location.
      *
      * @return the variable nazwa
      */
-
     public String getNazwa() {
         return nazwa;
     }
 
     /**
+     * Sets the value of the private field {@code nazwa}. It is the user-friendly variable which contains the name of the location.
      *
      * @param nazwa the same as described above, but here is passed to the setNazwa method which enables to change the
      *              value nazwa
      */
-
     public void setNazwa(String nazwa) {
         this.nazwa = nazwa;
     }
