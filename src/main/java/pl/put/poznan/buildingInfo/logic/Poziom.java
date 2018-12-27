@@ -51,7 +51,7 @@ public class Poziom extends Lokalizacja {
 
     /**
      * Gets the value of the private field {@code listaPomieszczen}. It is a list containing elements type {@link Pomieszczenie}.
-     * All that rooms from this list {code @listaPomieszczen} are parts of the current level.
+     * All that rooms from this list {code @listaPomieszczen} are parts of the current floor.
      *
      * @return ArrayList listaPomieszczen
      */
@@ -184,7 +184,7 @@ public class Poziom extends Lokalizacja {
     /**
      * <p>Gets the value of the total number of all the windows at the floor. That number is based on summary windows number of all rooms of the current floor.</p>
      * <p>The method iterates over the {@code listaPomieszczen} and accumulates the number of all the windows of every room.
-     * It is made by calling {@link Pomieszczenie#getListaOkien()} method for each room.</p>
+     * It is made by calling {@link Pomieszczenie#getLiczbaOkien()} method for each room.</p>
      *
      * @return the number of windows in the floor (describes the total number of windows in all rooms)
      */
@@ -192,7 +192,7 @@ public class Poziom extends Lokalizacja {
         int liczbaOkien = 0;
 
         for(Pomieszczenie pomieszczenie : listaPomieszczen) {
-            liczbaOkien += pomieszczenie.getListaOkien().size();
+            liczbaOkien += pomieszczenie.getLiczbaOkien();
         }
 
         return liczbaOkien;

@@ -4,19 +4,24 @@ package pl.put.poznan.buildingInfo.logic;
 import java.util.*;
 
 /**
- * Class Budynek represents class Lokalizacja with additional attributes such as ArrayList type Poziom - listaPoziomow
+ * Class {@link Budynek} represents class {@link Lokalizacja} with additional attributes such as {@code ArrayList} type {@link Poziom} - {@code listaPoziomow}
  */
 public class Budynek extends Lokalizacja{
 
     private ArrayList <Poziom> listaPoziomow ;
 
-
+    /**
+     * This is an empty constructor of the {@link Budynek} which allows to set the basic properties of the object
+     * to the default null values.
+     */
     public Budynek() {
         super();
         this.listaPoziomow = new ArrayList<>();
     }
 
     /**
+     * This is a constructor of the {@link Budynek} which allows to set the basic properties of the object
+     * with given parameters values.
      *
      * @param id variable inherited from the class Lokalizacja
      *           here is passed to the Costructor method of the class Budynek
@@ -31,6 +36,7 @@ public class Budynek extends Lokalizacja{
     }
 
     /**
+     * This is an overridden method toString. It allows to print on the screen basic info about an object of the {@link Budynek}
      *
      * @return the String containing names of variables and their values
      */
@@ -44,6 +50,8 @@ public class Budynek extends Lokalizacja{
     }
 
     /**
+     * Gets the value of the private field {@code listaPoziomow}. It is a list containing elements type {@link Poziom}.
+     * All that floors from this list {code @listaPoziomow} are parts of the current building.
      *
      * @return ArrayList listaPoziomow
      */
@@ -52,6 +60,8 @@ public class Budynek extends Lokalizacja{
     }
 
     /**
+     * Sets the value of the private field {@code listaPoziomow}. It is a list containing elements type {@link Poziom}.
+     * All that floors from this list {code @listaPoziomow} are parts of the current building.
      *
      * @param listaPoziomow the same as described above, but here is passed to the setListaPoziomow method
      *                      so we can change to the other list of the same type
@@ -61,6 +71,9 @@ public class Budynek extends Lokalizacja{
     }
 
     /**
+     * <p>Gets the value of the total area of the building. That area is based on summary area of all floors of the current building.</p>
+     * <p>The method iterates over the {@code listaPoziomow} and accumulates the area of every floor.
+     * It is made by calling {@link Poziom#getArea()} method for each floor.</p>
      *
      * @return the sum of Building's areas from all floors (describes the total area of the building)
      */
@@ -75,6 +88,9 @@ public class Budynek extends Lokalizacja{
     }
 
     /**
+     * <p>Gets the value of the total volume of the building. That volume is based on summary volume of all floors of the current building.</p>
+     * <p>The method iterates over the {@code listaPoziomow} and accumulates the volume of every floor.
+     * It is made by calling {@link Poziom#getCube()} method for each floor.</p>
      *
      * @return the sum of Building's volumes from all floors (describes the total volume of the building)
      */
@@ -89,6 +105,9 @@ public class Budynek extends Lokalizacja{
     }
 
     /**
+     * <p>Gets the value of the total lighting power of the building. That power is based on summary power of all floors of the current building.</p>
+     * <p>The method iterates over the {@code listaPoziomow} and accumulates the lighting power of every floor.
+     * It is made by calling {@link Poziom#getLight()} method for each room.</p>
      *
      * @return the sum of Building's lighting power from all floors (describes the total lighting power of the building)
      */
@@ -103,6 +122,9 @@ public class Budynek extends Lokalizacja{
     }
 
     /**
+     * <p>Gets the value of the total energy consumption for heating of the building. That energy is based on summary energy of all floors of the current building.</p>
+     * <p>The method iterates over the {@code listaPoziomow} and accumulates the energy consumption for heating of every floor.
+     * It is made by calling {@link Poziom#getHeating()} method for each floor.</p>
      *
      * @return the sum of Building's energy consumption for heating from all floors
      * (describes the total energy consumption for heating of the building)
@@ -117,6 +139,9 @@ public class Budynek extends Lokalizacja{
     }
 
     /**
+     * <p>Gets the date when the last renovation of the building was made. That date is based on the oldest date of last renovation of the floors of the current building.</p>
+     * <p>The method iterates over the {@code listaPoziomow} and catches the oldest date.
+     * In case of the empty list {@code listaPoziomow}, the value {@code null} is returned.</p>
      *
      * @return the date when the last renovation of the building was made.
      * It is the date of last renovation of any floor in this building.
@@ -139,6 +164,9 @@ public class Budynek extends Lokalizacja{
     }
 
     /**
+     * <p>Gets the value of the total area of all the windows at the building. That area is based on summary windows area of all floors of the current building.</p>
+     * <p>The method iterates over the {@code listaPoziomow} and accumulates the area of all the windows of every floor.
+     * It is made by calling {@link Poziom#getPowierzchniaOkien()} method for each floor.</p>
      *
      * @return the sum of Building's windows areas from all floors (describes the total windows area of the building)
      */
@@ -153,6 +181,9 @@ public class Budynek extends Lokalizacja{
     }
 
     /**
+     * <p>Gets the value of the total number of all the windows at the building. That number is based on summary windows number of all floors of the current building.</p>
+     * <p>The method iterates over the {@code listaPoziomow} and accumulates the number of all the windows of every floor.
+     * It is made by calling {@link Poziom#getLiczbaOkien()} method for each floor.</p>
      *
      * @return the number of windows in the building (describes the total number of windows in all floors)
      */
@@ -167,6 +198,9 @@ public class Budynek extends Lokalizacja{
     }
 
     /**
+     * <p>Gets the value of the coefficient of lighting power to the area of the building.</p>
+     * <p>The method calculate ratio of the value {@link Budynek#getLight()} to the value {@link Budynek#getArea()}.
+     * In case of {@link Budynek#getArea()} equals {@code 0}, the method returns {@code 0}.</p>
      *
      * @return the number representing proportion of the lighting power to the area of the building
      */
@@ -182,6 +216,9 @@ public class Budynek extends Lokalizacja{
     }
 
     /**
+     * <p>Gets the value of the coefficient of the energy consumption for heating to the volume of the building.</p>
+     * <p>The method calculate ratio of the value {@link Budynek#getLight()} to the value {@link Budynek#getCube()}.
+     * In case of {@link Budynek#getCube()} equals {@code 0}, the method returns {@code 0}.</p>
      *
      * @return the number representing proportion of the energy consumption for heating to the volume of the building
      */
@@ -196,6 +233,16 @@ public class Budynek extends Lokalizacja{
         return getHeating() / kubatura;
     }
 
+    /**
+     * <p>Gets the list of rooms, which exceeding given limit of the energy consumption for heating in current building.</p>
+     * <p>The method iterates over the list of floors, to iterates over the list of rooms, to check if the
+     * energy consumption for heating exceeds the limit.
+     * It is made for each room with help of {@link Pomieszczenie#getHeatingPerCubicMeter()} method.</p>
+     *
+     * @param limit represents the limit of the energy consumption [kWh] for heating the room per year, which shouldn't be exceeded
+     *
+     * @return the list of objects of the type {@link Pomieszczenie}, which is the list of the rooms exceeding the heating limit
+     */
     public ArrayList <Pomieszczenie> getHeatingLimit(double limit) {
         ArrayList<Pomieszczenie> listaHeatingLimit;
         listaHeatingLimit = new ArrayList<>();
@@ -209,6 +256,16 @@ public class Budynek extends Lokalizacja{
         return listaHeatingLimit;
     }
 
+    /**
+     * <p>Gets the list of rooms, which exceeding given limit of the lighting power in current building.</p>
+     * <p>The method iterates over the list of floors, to iterates over the list of rooms, to check if the
+     * lighting power exceeds the limit.
+     * It is made for each room with help of {@link Pomieszczenie#getLightPerSquareMeter()} method.</p>
+     *
+     * @param limit represents the limit of the lighting power [W] in the room, which shouldn't be exceeded
+     *
+     * @return the list of objects of the type {@link Pomieszczenie}, which is the list of the rooms exceeding the lighting power limit
+     */
     public ArrayList <Pomieszczenie> getLightLimit(double limit) {
         ArrayList<Pomieszczenie> listaLightLimit;
         listaLightLimit = new ArrayList<>();
@@ -222,6 +279,16 @@ public class Budynek extends Lokalizacja{
         return listaLightLimit;
     }
 
+    /**
+     * <p>Gets the list of rooms, which don't fulfill given limit of the natural light in current building.</p>
+     * <p>The method iterates over the list of floors, to iterates over the list of rooms, to check if the
+     * natural light fulfill the limit.
+     * It is made for each room with help of {@link Pomieszczenie#getNaturalLight()} method.</p>
+     *
+     * @param limit represents the limit of the natural light in the room, which should be fulfill
+     *
+     * @return the list of objects of the type {@link Pomieszczenie}, which is the list of the rooms not fulfilling the natural light limit
+     */
     public ArrayList <Pomieszczenie> getNaturalLightLimit(double limit) {
         ArrayList<Pomieszczenie> listaNaturalLightLimit;
         listaNaturalLightLimit = new ArrayList<>();
@@ -235,6 +302,16 @@ public class Budynek extends Lokalizacja{
         return listaNaturalLightLimit;
     }
 
+    /**
+     * <p>Gets the list of rooms, which exceeding given limit of the renovation's date in current building.</p>
+     * <p>The method iterates over the list of floors, to iterates over the list of rooms, to check if the
+     * renovation's date is older than the renovation's date limit.
+     * It is made for each room with help of {@link Pomieszczenie#getDataRemontu()} method.</p>
+     *
+     * @param limit represents the limit of the date when the last renovation of the room should be made
+     *
+     * @return the list of objects of the type {@link Pomieszczenie}, which is the list of the rooms exceeding the renovation's date limit
+     */
     public ArrayList <Pomieszczenie> getDataRemontuLimit(Date limit) {
         ArrayList<Pomieszczenie> listaDataRemontuLimit;
         listaDataRemontuLimit = new ArrayList<>();
