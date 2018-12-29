@@ -144,4 +144,11 @@ public abstract class Lokalizacja {
      * @return the number representing proportion of the energy consumption for heating to the volume of the localization
      */
     public abstract double getHeatingPerCubicMeter();
+
+    /**
+     * Abstract method, which provide in extended classes to get the number representing proportion of the area of windows to the volume of the localization.
+     *
+     * @return the number representing proportion of the area of windows to the volume of the localization
+     */
+    public abstract double getNaturalLight();
 }

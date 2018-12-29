@@ -297,4 +297,18 @@ public class Pomieszczenie extends Lokalizacja{
         return getHeating() / getCube();
     }
 
+    /**
+     * <p>Gets the value of the coefficient of the area of windows to the volume of the room.</p>
+     * <p>The method calculate ratio of the value {@link Pomieszczenie#getPowierzchniaOkien()} to the value {@link Pomieszczenie#getCube()}.
+     * In case of {@code cube} equals {@code 0}, the method returns {@code 0}.</p>
+     *
+     * @return the number representing proportion of the area of windows to the volume of the room
+     */
+    public double getNaturalLight() {
+        if(getCube() == 0) {
+            return 0;
+        }
+
+        return getPowierzchniaOkien() / getCube();
+    }
 }

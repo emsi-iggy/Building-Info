@@ -234,6 +234,21 @@ public class Budynek extends Lokalizacja{
     }
 
     /**
+     * <p>Gets the value of the coefficient of the area of windows to the volume of the building.</p>
+     * <p>The method calculate ratio of the value {@link Pomieszczenie#getPowierzchniaOkien()} to the value {@link Pomieszczenie#getCube()}.
+     * In case of {@code cube} equals {@code 0}, the method returns {@code 0}.</p>
+     *
+     * @return the number representing proportion of the area of windows to the volume of the building
+     */
+    public double getNaturalLight() {
+        if(getCube() == 0) {
+            return 0;
+        }
+
+        return getPowierzchniaOkien() / getCube();
+    }
+
+    /**
      * <p>Gets the list of rooms, which exceeding given limit of the energy consumption for heating in current building.</p>
      * <p>The method iterates over the list of floors, to iterates over the list of rooms, to check if the
      * energy consumption for heating exceeds the limit.

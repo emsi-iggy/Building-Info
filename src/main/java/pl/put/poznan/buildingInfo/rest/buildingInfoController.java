@@ -361,7 +361,7 @@ public class buildingInfoController {
                 wynik = "Pomieszczenia, ktore nie osiagaja okreslonego poziomu wspolczynnika oswietlenia naturalnego w budynku \"" + listaBudynkow.get(indeksBudynku).getNazwa() + "\":";
 
                 for(Pomieszczenie pomieszczenie : listaPomieszczen) {
-                    wynik += "\n\t" + pomieszczenie.getNazwa() + " - " + pomieszczenie.getNaturaLight();
+                    wynik += "\n\t" + pomieszczenie.getNazwa() + " - " + pomieszczenie.getNaturalLight();
                 }
                 return wynik;
 
