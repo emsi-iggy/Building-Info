@@ -236,7 +236,7 @@ public class Poziom extends Lokalizacja {
 
     /**
      * <p>Gets the value of the coefficient of the area of windows to the volume of the floor.</p>
-     * <p>The method calculate ratio of the value {@link Pomieszczenie#getPowierzchniaOkien()} to the value {@link Pomieszczenie#getCube()}.
+     * <p>The method calculate ratio of the value {@link Poziom#getPowierzchniaOkien()} to the value {@link Poziom#getCube()}.
      * In case of {@code cube} equals {@code 0}, the method returns {@code 0}.</p>
      *
      * @return the number representing proportion of the area of windows to the volume of the floor
