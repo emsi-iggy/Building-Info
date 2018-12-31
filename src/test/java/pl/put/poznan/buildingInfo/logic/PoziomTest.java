@@ -3,524 +3,337 @@ package pl.put.poznan.buildingInfo.logic;
 import static org.junit.Assert.*;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 
-import static pl.put.poznan.buildingInfo.logic.Okno.RodzajOknaPCV;
-import static pl.put.poznan.buildingInfo.logic.Okno.SposobOtwarciaOkna;
+import static org.mockito.Mockito.*;
 
 /**
  * This is the test class for class Poziom, which mainly tests the boundary conditions of the class.
  */
 public class PoziomTest {
-    private Okno okno[];
-    private ArrayList<Okno> listaOkien;
-    private Pomieszczenie pomieszczenie[];
     private ArrayList<Pomieszczenie> listaPomieszczen;
     private Poziom poziom;
-
-    /**
-     * Set values before the test execution.
-     * There is set of 10 objects of class Pomieszczenie.
-     */
-    @Before
-    public void setUp() {
-        okno = new Okno[6];
-        pomieszczenie = new Pomieszczenie[10];
-
-
-        okno[0] = new Okno(0.5, 1, 500, RodzajOknaPCV.TRADYCYJNE, SposobOtwarciaOkna.OBROTOWE);
-        okno[1] = new Okno(0.5, 1, 500, RodzajOknaPCV.TRADYCYJNE, SposobOtwarciaOkna.UCHYLNOOBROTOWE);
-        okno[2] = new Okno(1, 1.3, 700, RodzajOknaPCV.TRADYCYJNE, SposobOtwarciaOkna.OBROTOWE);
-        okno[3] = new Okno(1, 1.3, 700, RodzajOknaPCV.TRADYCYJNE, SposobOtwarciaOkna.UCHYLNOOBROTOWE);
-        okno[4] = new Okno(0.75, 1.3, 620, RodzajOknaPCV.TRADYCYJNE, SposobOtwarciaOkna.OBROTOWE);
-        okno[5] = new Okno(0.75, 1.3, 620, RodzajOknaPCV.TRADYCYJNE, SposobOtwarciaOkna.UCHYLNOOBROTOWE);
-
-        listaOkien = new ArrayList<>();
-        listaOkien.add(okno[0]);
-        listaOkien.add(okno[1]);
-        pomieszczenie[0] = new Pomieszczenie(0, "Pokój 0", new Date(101, 1, 3), listaOkien, 10, 25, 10000, 80);
-
-        listaOkien = new ArrayList<>();
-        listaOkien.add(okno[2]);
-        listaOkien.add(okno[3]);
-        pomieszczenie[1] = new Pomieszczenie(1, "Pokój 1", new Date(105, 7, 31), listaOkien, 20, 50, 22000, 30);
-
-        listaOkien = new ArrayList<>();
-        listaOkien.add(okno[4]);
-        listaOkien.add(okno[5]);
-        pomieszczenie[2] = new Pomieszczenie(2, "Pokój 2", new Date(15, 7, 31), listaOkien, 10, 25, 10000, 5);
-
-        listaOkien = new ArrayList<>();
-        listaOkien.add(okno[0]);
-        listaOkien.add(okno[1]);
-        listaOkien.add(okno[4]);
-        listaOkien.add(okno[5]);
-        pomieszczenie[3] = new Pomieszczenie(3, "Pokój 3", new Date(109, 11, 10), listaOkien, 12, 30, 7000, 80);
-
-        listaOkien = new ArrayList<>();
-        listaOkien.add(okno[0]);
-        listaOkien.add(okno[1]);
-        listaOkien.add(okno[2]);
-        listaOkien.add(okno[3]);
-        pomieszczenie[4] = new Pomieszczenie(4, "Pokój 4", new Date(108, 9, 15), listaOkien, 10, 25, 8000, 40);
-
-        listaOkien = new ArrayList<>();
-        listaOkien.add(okno[2]);
-        listaOkien.add(okno[3]);
-        listaOkien.add(okno[4]);
-        listaOkien.add(okno[5]);
-        pomieszczenie[5] = new Pomieszczenie(5, "Pokój 5", new Date(110, 1, 21), listaOkien, 12, 30, 15000, 70);
-
-        listaOkien = new ArrayList<>();
-        listaOkien.add(okno[2]);
-        pomieszczenie[6] = new Pomieszczenie(6, "Pokój 6", new Date(115, 8, 25), listaOkien, 6, 15, 15000, 135);
-
-        listaOkien = new ArrayList<>();
-        listaOkien.add(okno[3]);
-        pomieszczenie[7] = new Pomieszczenie(7, "Pokój 7", new Date(101, 7, 30), listaOkien, 10, 25, 20000, 15);
-
-        listaOkien = new ArrayList<>();
-        listaOkien.add(okno[5]);
-        listaOkien.add(okno[5]);
-        listaOkien.add(okno[5]);
-        pomieszczenie[8] = new Pomieszczenie(8, "Pokój 8", new Date(112, 8, 3), listaOkien, 6, 15, 6000, 80);
-
-        listaOkien = new ArrayList<>();
-        pomieszczenie[9] = new Pomieszczenie(9, "Pokój 9", new Date(112, 5, 29), listaOkien, 20, 50, 5000, 75);
-    }
 
     /**
      * Clean up after the test execution.
      */
     @After
     public void tearDown() {
-        listaOkien = null;
-        okno = null;
-        pomieszczenie = null;
         listaPomieszczen = null;
         poziom = null;
     }
 
     /**
      * Check if the value returned by the method getArea in class Poziom
-     * is correct when the empty list of the class Pomieszczenie is set.
+     * is correct when the various list of the class Pomieszczenie is set.
      */
     @Test
-    public void testGetArea_brakPomieszczen() {
+    public void testGetArea() {
+        Pomieszczenie mockPomieszczenie[] = new Pomieszczenie[3];
+        for(int i = 0; i < 3; i++) {
+            mockPomieszczenie[i] = mock(Pomieszczenie.class);
+            when(mockPomieszczenie[i].getArea()).thenReturn(10.0 * (i + 1));
+        }
+
         listaPomieszczen = new ArrayList<>();
-        poziom = new Poziom(0, "Pusty poziom", listaPomieszczen);
+        poziom = new Poziom(0, "Poziom testujący metode getArea()", listaPomieszczen);
+        assertEquals(0, poziom.getArea(), 0);   //test bez pomieszczen
 
-        assertEquals(0, poziom.getArea(), 0);
-    }
+        listaPomieszczen.add(mockPomieszczenie[0]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(10, poziom.getArea(), 0);  //test z jednym pomieszczeniem
+        verify(mockPomieszczenie[0]).getArea();
 
-    /**
-     * Check if the value returned by the method getArea in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
-     */
-    @Test
-    public void testGetArea_jednoPomieszczenie() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[0]);
-        poziom = new Poziom(0, "Poziom z jednym pomieszczeniem", listaPomieszczen);
-
-        assertEquals(10, poziom.getArea(), 0);
-    }
-
-    /**
-     * Check if the value returned by the method getArea in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
-     */
-    @Test
-    public void testGetArea_wielePomieszczen() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[0]);
-        listaPomieszczen.add(pomieszczenie[1]);
-        listaPomieszczen.add(pomieszczenie[2]);
-        poziom = new Poziom(0, "Poziom z wieloma pomieszczeniami", listaPomieszczen);
-
-        assertEquals(40, poziom.getArea(), 0);
+        listaPomieszczen.add(mockPomieszczenie[1]);
+        listaPomieszczen.add(mockPomieszczenie[2]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(60, poziom.getArea(), 0);  //test z wieloma pomieszczeniami
+        verify(mockPomieszczenie[0], times(2)).getArea();
+        verify(mockPomieszczenie[1]).getArea();
+        verify(mockPomieszczenie[2]).getArea();
     }
 
     /**
      * Check if the value returned by the method getCube in class Poziom
-     * is correct when the empty list of the class Pomieszczenie is set.
+     * is correct when the various list of the class Pomieszczenie is set.
      */
     @Test
-    public void testGetCube_brakPomieszczen() {
+    public void testGetCube() {
+        Pomieszczenie mockPomieszczenie[] = new Pomieszczenie[3];
+        for(int i = 0; i < 3; i++) {
+            mockPomieszczenie[i] = mock(Pomieszczenie.class);
+            when(mockPomieszczenie[i].getCube()).thenReturn(15.0 + 5 * i);
+        }
+
         listaPomieszczen = new ArrayList<>();
-        poziom = new Poziom(0, "Pusty poziom", listaPomieszczen);
+        poziom = new Poziom(0, "Poziom testujący metode getCube", listaPomieszczen);
+        assertEquals(0, poziom.getCube(), 0);   //test bez pomieszczen
 
-        assertEquals(0, poziom.getCube(), 0);
-    }
+        listaPomieszczen.add(mockPomieszczenie[0]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(15, poziom.getCube(), 0);  //test z jednym pomieszczeniem
+        verify(mockPomieszczenie[0]).getCube();
 
-    /**
-     * Check if the value returned by the method getCube in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
-     */
-    @Test
-    public void testGetCube_jednoPomieszczenie() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[0]);
-        poziom = new Poziom(0, "Poziom z jednym pomieszczeniem", listaPomieszczen);
-
-        assertEquals(25, poziom.getCube(), 0);
-    }
-
-    /**
-     * Check if the value returned by the method getCube in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
-     */
-    @Test
-    public void testGetCube_wielePomieszczen() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[0]);
-        listaPomieszczen.add(pomieszczenie[1]);
-        listaPomieszczen.add(pomieszczenie[2]);
-        poziom = new Poziom(0, "Poziom z wieloma pomieszczeniami", listaPomieszczen);
-
-        assertEquals(100, poziom.getCube(), 0);
+        listaPomieszczen.add(mockPomieszczenie[1]);
+        listaPomieszczen.add(mockPomieszczenie[2]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(60, poziom.getCube(), 0);  //test z wieloma pomieszczeniami
+        verify(mockPomieszczenie[0], times(2)).getCube();
+        verify(mockPomieszczenie[1]).getCube();
+        verify(mockPomieszczenie[2]).getCube();
     }
 
     /**
      * Check if the value returned by the method getLight in class Poziom
-     * is correct when the empty list of the class Pomieszczenie is set.
+     * is correct when the various list of the class Pomieszczenie is set.
      */
     @Test
-    public void testGetLight_brakPomieszczen() {
+    public void testGetLight() {
+        Pomieszczenie mockPomieszczenie[] = new Pomieszczenie[3];
+        for(int i = 0; i < 3; i++) {
+            mockPomieszczenie[i] = mock(Pomieszczenie.class);
+            when(mockPomieszczenie[i].getLight()).thenReturn(60.0 + 10 * i * i);
+        }
+
         listaPomieszczen = new ArrayList<>();
-        poziom = new Poziom(0, "Pusty poziom", listaPomieszczen);
+        poziom = new Poziom(0, "Poziom testujący metode getLight", listaPomieszczen);
+        assertEquals(0, poziom.getLight(), 0);   //test bez pomieszczen
 
-        assertEquals(0, poziom.getLight(), 0);
-    }
+        listaPomieszczen.add(mockPomieszczenie[0]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(60, poziom.getLight(), 0);  //test z jednym pomieszczeniem
+        verify(mockPomieszczenie[0]).getLight();
 
-    /**
-     * Check if the value returned by the method getLight in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
-     */
-    @Test
-    public void testGetLight_jednoPomieszczenie() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[3]);
-        poziom = new Poziom(0, "Poziom z jednym pomieszczeniem", listaPomieszczen);
-
-        assertEquals(80, poziom.getLight(), 0);
-    }
-
-    /**
-     * Check if the value returned by the method getLight in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
-     */
-    @Test
-    public void testGetLight_wielePomieszczen() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[3]);
-        listaPomieszczen.add(pomieszczenie[4]);
-        listaPomieszczen.add(pomieszczenie[5]);
-        poziom = new Poziom(0, "Poziom z wieloma pomieszczeniami", listaPomieszczen);
-
-        assertEquals(190, poziom.getLight(), 0);
+        listaPomieszczen.add(mockPomieszczenie[1]);
+        listaPomieszczen.add(mockPomieszczenie[2]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(230, poziom.getLight(), 0);  //test z wieloma pomieszczeniami
+        verify(mockPomieszczenie[0], times(2)).getLight();
+        verify(mockPomieszczenie[1]).getLight();
+        verify(mockPomieszczenie[2]).getLight();
     }
 
     /**
      * Check if the value returned by the method getHeating in class Poziom
-     * is correct when the empty list of the class Pomieszczenie is set.
+     * is correct when the various list of the class Pomieszczenie is set.
      */
     @Test
-    public void testGetHeating_brakPomieszczen() {
+    public void testGetHeating() {
+        Pomieszczenie mockPomieszczenie[] = new Pomieszczenie[3];
+        for(int i = 0; i < 3; i++) {
+            mockPomieszczenie[i] = mock(Pomieszczenie.class);
+            when(mockPomieszczenie[i].getHeating()).thenReturn(1500.0 + 500 * i);
+        }
+
         listaPomieszczen = new ArrayList<>();
-        poziom = new Poziom(0, "Pusty poziom", listaPomieszczen);
+        poziom = new Poziom(0, "Poziom testujący metode getHeating", listaPomieszczen);
+        assertEquals(0, poziom.getHeating(), 0);   //test bez pomieszczen
 
-        assertEquals(0, poziom.getHeating(), 0);
-    }
+        listaPomieszczen.add(mockPomieszczenie[0]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(1500, poziom.getHeating(), 0);  //test z jednym pomieszczeniem
+        verify(mockPomieszczenie[0]).getHeating();
 
-    /**
-     * Check if the value returned by the method getHeating in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
-     */
-    @Test
-    public void testGetHeating_jednoPomieszczenie() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[3]);
-        poziom = new Poziom(0, "Poziom z jednym pomieszczeniem", listaPomieszczen);
-
-        assertEquals(7000, poziom.getHeating(), 0);
-    }
-
-    /**
-     * Check if the value returned by the method getHeating in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
-     */
-    @Test
-    public void testGetHeating_wielePomieszczen() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[3]);
-        listaPomieszczen.add(pomieszczenie[4]);
-        listaPomieszczen.add(pomieszczenie[5]);
-        poziom = new Poziom(0, "Poziom z wieloma pomieszczeniami", listaPomieszczen);
-
-        assertEquals(30000, poziom.getHeating(), 0);
+        listaPomieszczen.add(mockPomieszczenie[1]);
+        listaPomieszczen.add(mockPomieszczenie[2]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(6000, poziom.getHeating(), 0);  //test z wieloma pomieszczeniami
+        verify(mockPomieszczenie[0], times(2)).getHeating();
+        verify(mockPomieszczenie[1]).getHeating();
+        verify(mockPomieszczenie[2]).getHeating();
     }
 
     /**
      * Check if the value returned by the method getDataRemontu in class Poziom
-     * is correct when the empty list of the class Pomieszczenie is set.
+     * is correct when the various list of the class Pomieszczenie is set.
      */
     @Test
-    public void testGetDataRemontu_brakPomieszczen() {
+    public void testGetDataRemontu() {
+        Pomieszczenie mockPomieszczenie[] = new Pomieszczenie[3];
+        for(int i = 0; i < 3; i++) {
+            mockPomieszczenie[i] = mock(Pomieszczenie.class);
+        }
+        when(mockPomieszczenie[0].getDataRemontu()).thenReturn(new Date(115, 8, 25));
+        when(mockPomieszczenie[1].getDataRemontu()).thenReturn(new Date(101, 7, 30));
+        when(mockPomieszczenie[2].getDataRemontu()).thenReturn(new Date(112, 8, 3));
+
         listaPomieszczen = new ArrayList<>();
-        poziom = new Poziom(0, "Pusty poziom", listaPomieszczen);
+        poziom = new Poziom(0, "Poziom testujący metode getDataRemontu", listaPomieszczen);
+        assertNull(poziom.getDataRemontu());    //test bez pomieszczen
 
-        assertNull(poziom.getDataRemontu());
-    }
+        listaPomieszczen.add(mockPomieszczenie[0]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(new Date(115, 8, 25), poziom.getDataRemontu());  //test z jednym pomieszczeniem
+        verify(mockPomieszczenie[0], atLeastOnce()).getDataRemontu();
 
-    /**
-     * Check if the value returned by the method getDataRemontu in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
-     */
-    @Test
-    public void testGetDataRemontu_jednoPomieszczenie() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[6]);
-        poziom = new Poziom(0, "Poziom z jednym pomieszczeniem", listaPomieszczen);
-
-        assertEquals(new Date(115, 8, 25), poziom.getDataRemontu());
-    }
-
-    /**
-     * Check if the value returned by the method getDataRemontu in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
-     */
-    @Test
-    public void testGetDataRemontu_wielePomieszczen() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[6]);
-        listaPomieszczen.add(pomieszczenie[7]);
-        listaPomieszczen.add(pomieszczenie[8]);
-        poziom = new Poziom(0, "Poziom z wieloma pomieszczeniami", listaPomieszczen);
-
-        assertEquals(new Date(101, 7, 30), poziom.getDataRemontu());
+        listaPomieszczen.add(mockPomieszczenie[1]);
+        listaPomieszczen.add(mockPomieszczenie[2]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(new Date(101, 7, 30), poziom.getDataRemontu());  //test z wieloma pomieszczeniami
+        verify(mockPomieszczenie[0], atLeastOnce()).getDataRemontu();
+        verify(mockPomieszczenie[1], atLeastOnce()).getDataRemontu();
+        verify(mockPomieszczenie[2], atLeastOnce()).getDataRemontu();
     }
 
     /**
      * Check if the value returned by the method getPowierzchniaOkien in class Poziom
-     * is correct when the empty list of the class Pomieszczenie is set.
+     * is correct when the various list of the class Pomieszczenie is set.
      */
     @Test
-    public void testGetPowierzchniaOkien_brakPomieszczen() {
+    public void testGetPowierzchniaOkien() {
+        Pomieszczenie mockPomieszczenie[] = new Pomieszczenie[3];
+        for(int i = 0; i < 3; i++) {
+            mockPomieszczenie[i] = mock(Pomieszczenie.class);
+            when(mockPomieszczenie[i].getPowierzchniaOkien()).thenReturn(1.3 * i);
+        }
+
         listaPomieszczen = new ArrayList<>();
-        poziom = new Poziom(0, "Pusty poziom", listaPomieszczen);
+        poziom = new Poziom(0, "Poziom testujący metode getPowierzchniaOkien", listaPomieszczen);
+        assertEquals(0, poziom.getPowierzchniaOkien(), 0);    //test bez pomieszczen
 
-        assertEquals(0, poziom.getPowierzchniaOkien(), 0);
-    }
+        listaPomieszczen.add(mockPomieszczenie[0]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(0, poziom.getPowierzchniaOkien(), 0);  //test z jednym pomieszczeniem
+        verify(mockPomieszczenie[0]).getPowierzchniaOkien();
 
-    /**
-     * Check if the value returned by the method getPowierzchniaOkien in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
-     * This object of the class Pomieszczenie hasn't got any objects of the class Okno.
-     */
-    @Test
-    public void testGetPowierzchniaOkien_jednoPomieszczenie_BrakOkien() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[9]);
-        poziom = new Poziom(0, "Poziom z jednym pomieszczeniem bez okien", listaPomieszczen);
-
-        assertEquals(0, poziom.getPowierzchniaOkien(), 0);
-    }
-
-    /**
-     * Check if the value returned by the method getPowierzchniaOkien in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
-     * This object of the class Pomieszczenie has got only the one object of the class Okno.
-     */
-    @Test
-    public void testGetPowierzchniaOkien_jednoPomieszczenie_JednoOkno() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[6]);
-        poziom = new Poziom(0, "Poziom z jednym pomieszczeniem z jednym okniem", listaPomieszczen);
-
-        assertEquals(1.3, poziom.getPowierzchniaOkien(), 0);
-    }
-
-    /**
-     * Check if the value returned by the method getPowierzchniaOkien in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
-     * This object of the class Pomieszczenie has got many objects of the class Okno.
-     */
-    @Test
-    public void testGetPowierzchniaOkien_jednoPomieszczenie_WieleOkien() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[4]);
-        poziom = new Poziom(0, "Poziom z jednym pomieszczeniem z wieloma oknami", listaPomieszczen);
-
-        assertEquals(3.6, poziom.getPowierzchniaOkien(), 0.1);
-    }
-
-    /**
-     * Check if the value returned by the method getPowierzchniaOkien in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
-     */
-    @Test
-    public void testGetPowierzchniaOkien_wielePomieszczen() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[7]);
-        listaPomieszczen.add(pomieszczenie[8]);
-        listaPomieszczen.add(pomieszczenie[9]);
-        poziom = new Poziom(0, "Poziom z wieloma pomieszczeniami", listaPomieszczen);
-
-        assertEquals(4.225, poziom.getPowierzchniaOkien(), 0.001);
+        listaPomieszczen.add(mockPomieszczenie[1]);
+        listaPomieszczen.add(mockPomieszczenie[2]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(3.9, poziom.getPowierzchniaOkien(), 0.1);  //test z wieloma pomieszczeniami
+        verify(mockPomieszczenie[0], times(2)).getPowierzchniaOkien();
+        verify(mockPomieszczenie[1]).getPowierzchniaOkien();
+        verify(mockPomieszczenie[2]).getPowierzchniaOkien();
     }
 
     /**
      * Check if the value returned by the method getLiczbaOkien in class Poziom
-     * is correct when the empty list of the class Pomieszczenie is set.
+     * is correct when the various list of the class Pomieszczenie is set.
      */
     @Test
-    public void testGetLiczbaOkien_brakPomieszczen() {
+    public void testGetLiczbaOkien() {
+        Pomieszczenie mockPomieszczenie[] = new Pomieszczenie[3];
+        for(int i = 0; i < 3; i++) {
+            mockPomieszczenie[i] = mock(Pomieszczenie.class);
+            when(mockPomieszczenie[i].getLiczbaOkien()).thenReturn(1 + i * i);
+        }
+
         listaPomieszczen = new ArrayList<>();
-        poziom = new Poziom(0, "Pusty poziom", listaPomieszczen);
+        poziom = new Poziom(0, "Poziom testujący metode getLiczbaOkien", listaPomieszczen);
+        assertEquals(0, poziom.getLiczbaOkien());    //test bez pomieszczen
 
-        assertEquals(0, poziom.getLiczbaOkien());
-    }
+        listaPomieszczen.add(mockPomieszczenie[0]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(1, poziom.getLiczbaOkien());  //test z jednym pomieszczeniem
+        verify(mockPomieszczenie[0]).getLiczbaOkien();
 
-    /**
-     * Check if the value returned by the method getLiczbaOkien in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
-     * This object of the class Pomieszczenie hasn't got any objects of the class Okno.
-     */
-    @Test
-    public void testGetLiczbaOkien_jednoPomieszczenie_BrakOkien() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[9]);
-        poziom = new Poziom(0, "Poziom z jednym pomieszczeniem bez okien", listaPomieszczen);
-
-        assertEquals(0, poziom.getLiczbaOkien());
-    }
-
-    /**
-     * Check if the value returned by the method getLiczbaOkien in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
-     * This object of the class Pomieszczenie has got only the one object of the class Okno.
-     */
-    @Test
-    public void testGetLiczbaOkien_jednoPomieszczenie_JednoOkno() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[6]);
-        poziom = new Poziom(0, "Poziom z jednym pomieszczeniem z jednym okniem", listaPomieszczen);
-
-        assertEquals(1, poziom.getLiczbaOkien());
-    }
-
-    /**
-     * Check if the value returned by the method getLiczbaOkien in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
-     * This object of the class Pomieszczenie has got many objects of the class Okno.
-     */
-    @Test
-    public void testGetLiczbaOkien_jednoPomieszczenie_WieleOkien() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[4]);
-        poziom = new Poziom(0, "Poziom z jednym pomieszczeniem z wieloma oknami", listaPomieszczen);
-
-        assertEquals(4, poziom.getLiczbaOkien());
-    }
-
-    /**
-     * Check if the value returned by the method getLiczbaOkien in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
-     */
-    @Test
-    public void testGetLiczbaOkien_wielePomieszczen() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[7]);
-        listaPomieszczen.add(pomieszczenie[8]);
-        listaPomieszczen.add(pomieszczenie[9]);
-        poziom = new Poziom(0, "Poziom z wieloma pomieszczeniami", listaPomieszczen);
-
-        assertEquals(4, poziom.getLiczbaOkien());
+        listaPomieszczen.add(mockPomieszczenie[1]);
+        listaPomieszczen.add(mockPomieszczenie[2]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(8, poziom.getLiczbaOkien());  //test z wieloma pomieszczeniami
+        verify(mockPomieszczenie[0], times(2)).getLiczbaOkien();
+        verify(mockPomieszczenie[1]).getLiczbaOkien();
+        verify(mockPomieszczenie[2]).getLiczbaOkien();
     }
 
     /**
      * Check if the value returned by the method getLightPerSquareMeter in class Poziom
-     * is correct when the empty list of the class Pomieszczenie is set.
+     * is correct when the various list of the class Pomieszczenie is set.
      */
     @Test
-    public void testGetLightPerSquareMeter_brakPomieszczen() {
+    public void testGetLightPerSquareMeter() {
+        Pomieszczenie mockPomieszczenie[] = new Pomieszczenie[3];
+        for(int i = 0; i < 3; i++) {
+            mockPomieszczenie[i] = mock(Pomieszczenie.class);
+            when(mockPomieszczenie[i].getArea()).thenReturn(10.0 * (i + 1));
+            when(mockPomieszczenie[i].getLight()).thenReturn(60.0 + 10 * i * i);
+        }
+
         listaPomieszczen = new ArrayList<>();
-        poziom = new Poziom(0, "Pusty poziom", listaPomieszczen);
+        poziom = new Poziom(0, "Poziom testujący metode getLightPerSquareMeter", listaPomieszczen);
+        assertEquals(0, poziom.getLightPerSquareMeter(), 0);   //test bez pomieszczen
 
-        assertEquals(0, poziom.getLightPerSquareMeter(), 0);
-    }
+        listaPomieszczen.add(mockPomieszczenie[0]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(6, poziom.getLightPerSquareMeter(), 0);  //test z jednym pomieszczeniem
+        verify(mockPomieszczenie[0], atLeastOnce()).getArea();
+        verify(mockPomieszczenie[0], atLeastOnce()).getLight();
 
-    /**
-     * Check if the value returned by the method getLightPerSquareMeter in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
-     */
-    @Test
-    public void testGetLightPerSquareMeter_jednoPomieszczenie() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[4]);
-        poziom = new Poziom(0, "Poziom z jednym pomieszczeniem", listaPomieszczen);
-
-        assertEquals(4, poziom.getLightPerSquareMeter(), 0);
-    }
-
-    /**
-     * Check if the value returned by the method getLightPerSquareMeter in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
-     */
-    @Test
-    public void testGetLightPerSquareMeter_wielePomieszczen() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[4]);
-        listaPomieszczen.add(pomieszczenie[7]);
-        listaPomieszczen.add(pomieszczenie[9]);
-        poziom = new Poziom(0, "Poziom z wieloma pomieszczeniami", listaPomieszczen);
-
-        assertEquals(3.25, poziom.getLightPerSquareMeter(), 0.01);
+        listaPomieszczen.add(mockPomieszczenie[1]);
+        listaPomieszczen.add(mockPomieszczenie[2]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(3.83, poziom.getLightPerSquareMeter(), 0.01);  //test z wieloma pomieszczeniami
+        for(int i = 0; i < 3; i++) {
+            verify(mockPomieszczenie[i], atLeastOnce()).getArea();
+            verify(mockPomieszczenie[i], atLeastOnce()).getLight();
+        }
     }
 
     /**
      * Check if the value returned by the method getHeatingPerCubicMeter in class Poziom
-     * is correct when the empty list of the class Pomieszczenie is set.
+     * is correct when the various list of the class Pomieszczenie is set.
      */
     @Test
-    public void testGetHeatingPerCubicMeter_brakPomieszczen() {
-        listaPomieszczen = new ArrayList<>();
-        poziom = new Poziom(0, "Pusty poziom", listaPomieszczen);
+    public void testGetHeatingPerCubicMeter() {
+        Pomieszczenie mockPomieszczenie[] = new Pomieszczenie[3];
+        for(int i = 0; i < 3; i++) {
+            mockPomieszczenie[i] = mock(Pomieszczenie.class);
+            when(mockPomieszczenie[i].getCube()).thenReturn(15.0 + 5 * i);
+            when(mockPomieszczenie[i].getHeating()).thenReturn(1500.0 + 500 * i);
+        }
 
-        assertEquals(0, poziom.getHeatingPerCubicMeter(), 0);
+        listaPomieszczen = new ArrayList<>();
+        poziom = new Poziom(0, "Poziom testujący metode getHeatingPerCubicMeter", listaPomieszczen);
+        assertEquals(0, poziom.getHeatingPerCubicMeter(), 0);   //test bez pomieszczen
+
+        listaPomieszczen.add(mockPomieszczenie[0]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(100, poziom.getHeatingPerCubicMeter(), 0);  //test z jednym pomieszczeniem
+        verify(mockPomieszczenie[0], atLeastOnce()).getCube();
+        verify(mockPomieszczenie[0], atLeastOnce()).getHeating();
+
+        listaPomieszczen.add(mockPomieszczenie[1]);
+        listaPomieszczen.add(mockPomieszczenie[2]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(100, poziom.getHeatingPerCubicMeter(), 0);  //test z wieloma pomieszczeniami
+        for(int i = 0; i < 3; i++) {
+            verify(mockPomieszczenie[i], atLeastOnce()).getCube();
+            verify(mockPomieszczenie[i], atLeastOnce()).getHeating();
+        }
     }
 
     /**
-     * Check if the value returned by the method getHeatingPerCubicMeter in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains only the one object.
+     * Check if the value returned by the method getNaturalLight in class Poziom
+     * is correct when the various list of the class Pomieszczenie is set.
      */
     @Test
-    public void testGetHeatingPerCubicMeter_jednoPomieszczenie() {
+    public void testGetNaturalLight() {
+        Pomieszczenie mockPomieszczenie[] = new Pomieszczenie[3];
+        for(int i = 0; i < 3; i++) {
+            mockPomieszczenie[i] = mock(Pomieszczenie.class);
+            when(mockPomieszczenie[i].getCube()).thenReturn(15.0 + 5 * i);
+            when(mockPomieszczenie[i].getPowierzchniaOkien()).thenReturn(1.3 * i);
+        }
+
         listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[1]);
-        poziom = new Poziom(0, "Poziom z jednym pomieszczeniem", listaPomieszczen);
+        poziom = new Poziom(0, "Poziom testujący metode getNaturalLight", listaPomieszczen);
+        assertEquals(0, poziom.getNaturalLight(), 0);   //test bez pomieszczen
 
-        assertEquals(440, poziom.getHeatingPerCubicMeter(), 0);
-    }
+        listaPomieszczen.add(mockPomieszczenie[0]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(0, poziom.getNaturalLight(), 0);  //test z jednym pomieszczeniem
+        verify(mockPomieszczenie[0], atLeastOnce()).getCube();
+        verify(mockPomieszczenie[0], atLeastOnce()).getPowierzchniaOkien();
 
-    /**
-     * Check if the value returned by the method getHeatingPerCubicMeter in class Poziom
-     * is correct when the list of the class Pomieszczenie is set, which contains many objects;
-     */
-    @Test
-    public void testGetHeatingPerCubicMeter_wielePomieszczen() {
-        listaPomieszczen = new ArrayList<>();
-        listaPomieszczen.add(pomieszczenie[1]);
-        listaPomieszczen.add(pomieszczenie[2]);
-        listaPomieszczen.add(pomieszczenie[4]);
-        poziom = new Poziom(0, "Poziom z wieloma pomieszczeniami", listaPomieszczen);
-
-        assertEquals(400, poziom.getHeatingPerCubicMeter(), 0);
+        listaPomieszczen.add(mockPomieszczenie[1]);
+        listaPomieszczen.add(mockPomieszczenie[2]);
+        poziom.setListaPomieszczen(listaPomieszczen);
+        assertEquals(0.065, poziom.getNaturalLight(), 0);  //test z wieloma pomieszczeniami
+        for(int i = 0; i < 3; i++) {
+            verify(mockPomieszczenie[i], atLeastOnce()).getCube();
+            verify(mockPomieszczenie[i], atLeastOnce()).getPowierzchniaOkien();
+        }
     }
 }
