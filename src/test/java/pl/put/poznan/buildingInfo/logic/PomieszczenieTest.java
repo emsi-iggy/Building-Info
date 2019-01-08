@@ -7,6 +7,7 @@ import org.junit.After;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 import static pl.put.poznan.buildingInfo.logic.Okno.RodzajOknaPCV.TRADYCYJNE;
 import static pl.put.poznan.buildingInfo.logic.Okno.SposobOtwarciaOkna.UCHYLNOROZWIERNE;
 
@@ -53,9 +54,15 @@ public class PomieszczenieTest {
      */
     @Test
     public void testGetPowierzchniaOkienLiczbyCalkowite() {
-        listaOkien.add(new Okno(3, 5, 940, TRADYCYJNE, UCHYLNOROZWIERNE));
+        Okno mockOkna[] = new Okno[1];
+        for(int i = 0; i < 1; i++) {
+            mockOkna[i] = mock(Okno.class);
+            when(mockOkna[i].getPowierzchnia()).thenReturn(10.0 * (i+1));
+        }
+        listaOkien.add(mockOkna[0]);
         pomieszczenie.setListaOkien(listaOkien);
-        assertEquals(3*5,pomieszczenie.getPowierzchniaOkien(),0);
+        assertEquals(10, pomieszczenie.getPowierzchniaOkien(), 0);  //test z jednym pomieszczeniem
+        verify(mockOkna[0]).getPowierzchnia(); // sprawdz czy funkcja zostala wywolana
     }
 
     /**
@@ -65,9 +72,19 @@ public class PomieszczenieTest {
      */
     @Test
     public void testGetPowierzchniaOkienLiczbyRzeczywiste() {
-        listaOkien.add(new Okno(1.2,0.7,430,TRADYCYJNE,UCHYLNOROZWIERNE));
+        Okno mockOkna[] = new Okno[3];
+        for(int i = 0; i < 3; i++) {
+            mockOkna[i] = mock(Okno.class);
+            when(mockOkna[i].getPowierzchnia()).thenReturn(10.1 * (i+1));
+        }
+        listaOkien.add(mockOkna[0]);
+        listaOkien.add(mockOkna[1]);
+        listaOkien.add(mockOkna[2]);
         pomieszczenie.setListaOkien(listaOkien);
-        assertEquals(1.2*0.7,pomieszczenie.getPowierzchniaOkien(),0.01);
+        assertEquals(60.6, pomieszczenie.getPowierzchniaOkien(), 0.1);  //test z jednym pomieszczeniem
+        verify(mockOkna[0]).getPowierzchnia(); // sprawdz czy funkcja zostala wywolana dla okna1
+        verify(mockOkna[1]).getPowierzchnia(); // sprawdz czy funkcja zostala wywolana dla okna2
+        verify(mockOkna[2]).getPowierzchnia(); // sprawdz czy funkcja zostala wywolana dla okna3
     }
 
     /**
