@@ -417,7 +417,7 @@ public class buildingInfoController {
                 wynik = "Pomieszczenia, ktore nie zostaly remontowane od czasu " + limitDaty.toString() + " w budynku \"" + listaBudynkow.get(indeksBudynku).getNazwa() + "\":";
 
                 for(Pomieszczenie pomieszczenie : listaPomieszczen) {
-                    wynik += "\n\t" + pomieszczenie.getNazwa() + " - " + pomieszczenie.getHeatingPerCubicMeter();
+                    wynik += "\n\t" + pomieszczenie.getNazwa() + " - " + pomieszczenie.getDataRemontu();
                 }
                 return wynik;
             }
