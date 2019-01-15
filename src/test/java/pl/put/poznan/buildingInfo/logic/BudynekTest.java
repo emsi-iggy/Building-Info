@@ -289,4 +289,38 @@ public class BudynekTest {
             verify(mockPoziom[i], atLeastOnce()).getHeating();
         }
     }
+
+
+    /**
+     * Check if the value returned by the method getHeatingPerCubicMeter in class Budynek
+     * is correct when the various list of the class Poziom is set.
+     */
+    @Test
+    public void testGetNaturalLight() {
+        Poziom mockPoziom[] = new Poziom[2];
+        for(int i = 0; i < 2; i++) {
+            mockPoziom[i] = mock(Poziom.class);
+            when(mockPoziom[i].getCube()).thenReturn(15.0 + 5 * i);
+            when(mockPoziom[i].getPowierzchniaOkien()).thenReturn(120.0 + (20 * (i + 1)));
+        }
+
+        listaPoziomow = new ArrayList<>();
+        budynek = new Budynek(0, "Budynek testujący metode getNaturalLight()", listaPoziomow);
+        assertEquals(0, budynek.getNaturalLight(), 0);   //test bez poziomow
+
+        listaPoziomow.add(mockPoziom[0]);
+        budynek.setListaPoziomow(listaPoziomow);
+        assertEquals(9.33, budynek.getNaturalLight(), 0.01);  //test z jednym pomieszczeniem
+        verify(mockPoziom[0], atLeastOnce()).getCube();
+        verify(mockPoziom[0], atLeastOnce()).getPowierzchniaOkien();
+
+        listaPoziomow.add(mockPoziom[1]);
+        budynek.setListaPoziomow(listaPoziomow);
+        assertEquals(8.57, budynek.getNaturalLight(), 0.01);  //test z wieloma poziomami
+        for(int i = 0; i < 2; i++) {
+            verify(mockPoziom[i], atLeastOnce()).getCube();
+            verify(mockPoziom[i], atLeastOnce()).getPowierzchniaOkien();
+        }
+    }
+
 }
