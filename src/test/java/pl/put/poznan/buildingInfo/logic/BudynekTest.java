@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 import static pl.put.poznan.buildingInfo.logic.Okno.RodzajOknaPCV;
 import static pl.put.poznan.buildingInfo.logic.Okno.SposobOtwarciaOkna;
 
@@ -166,6 +167,34 @@ public class BudynekTest {
     }
 
     /**
+     * Check if the value returned by the method getArea in class Budynek
+     * is correct when the various list of the class Poziom is set.
+     */
+    @Test
+    public void testGetArea() {
+        Poziom mockPoziom[] = new Poziom[2];
+        for(int i = 0; i < 2; i++) {
+            mockPoziom[i] = mock(Poziom.class);
+            when(mockPoziom[i].getArea()).thenReturn(60.0 + (i + 1) * 20);
+        }
+
+        listaPoziomow = new ArrayList<>();
+        budynek = new Budynek(0, "Budynek testujący metode getArea()", listaPoziomow);
+        assertEquals(0, budynek.getArea(), 0);   //test bez poziomow
+
+        listaPoziomow.add(mockPoziom[0]);
+        budynek.setListaPoziomow(listaPoziomow);
+        assertEquals(10, budynek.getArea(), 80);  //test z jednym poziomem
+        verify(mockPoziom[0]).getArea();
+
+        listaPoziomow.add(mockPoziom[1]);
+        budynek.setListaPoziomow(listaPoziomow);
+        assertEquals(60, budynek.getArea(), 180);  //test z wieloma poziomami
+        verify(mockPoziom[0], times(2)).getArea();
+        verify(mockPoziom[1]).getArea();
+    }
+
+    /**
      * Clean up after the test execution.
      */
     @After
@@ -179,124 +208,61 @@ public class BudynekTest {
     }
 
     /**
-     * Check if the value returned by the method getArea in class Budynek
-     * is correct when the empty list of the class Poziom is set.
-     */
-    @Test
-    public void testGetArea_brakPoziomow() {
-        listaPoziomow = new ArrayList<>();
-        budynek = new Budynek(0, "Pusty budynek", listaPoziomow);
-
-        assertEquals(0, budynek.getArea(), 0);
-    }
-
-    /**
-     * Check if the value returned by the method getArea in class Budynek
-     * is correct when the list of the class Poziom is set, which contains only the one object.
-     */
-    @Test
-    public void testGetArea_jedenPoziom() {
-        listaPoziomow = new ArrayList<>();
-        listaPoziomow.add(poziom[0]);
-        budynek = new Budynek(0, "Budynek z jednym poziomem", listaPoziomow);
-
-        assertEquals(52, budynek.getArea(), 0);
-    }
-
-    /**
-     * Check if the value returned by the method getArea in class Budynek
-     * is correct when the list of the class Poziom is set, which contains many objects;
-     */
-    @Test
-    public void testGetArea_wielePoziomow() {
-        listaPoziomow = new ArrayList<>();
-        listaPoziomow.add(poziom[0]);
-        listaPoziomow.add(poziom[1]);
-        listaPoziomow.add(poziom[2]);
-        budynek = new Budynek(0, "Budynek z wieloma poziomami", listaPoziomow);
-
-        assertEquals(108, budynek.getArea(), 0);
-    }
-
-    /**
      * Check if the value returned by the method getCube in class Budynek
-     * is correct when the empty list of the class Poziom is set.
+     * is correct when the various list of the class Poziom is set.
      */
     @Test
-    public void testGetCube_brakPoziomow() {
+    public void testGetCube() {
+        Poziom mockPoziom[] = new Poziom[2];
+        for(int i = 0; i < 2; i++) {
+            mockPoziom[i] = mock(Poziom.class);
+            when(mockPoziom[i].getCube()).thenReturn(180.0 + (i + 1) * 20);
+        }
+
         listaPoziomow = new ArrayList<>();
-        budynek = new Budynek(0, "Pusty budynek", listaPoziomow);
+        budynek = new Budynek(0, "Budynek testujący metode getCube()", listaPoziomow);
+        assertEquals(0, budynek.getCube(), 0);   //test bez poziomow
 
-        assertEquals(0, budynek.getCube(), 0);
-    }
+        listaPoziomow.add(mockPoziom[0]);
+        budynek.setListaPoziomow(listaPoziomow);
+        assertEquals(10, budynek.getCube(), 400);  //test z jednym poziomem
+        verify(mockPoziom[0]).getCube();
 
-    /**
-     * Check if the value returned by the method getCube in class Budynek
-     * is correct when the list of the class Poziom is set, which contains only the one object.
-     */
-    @Test
-    public void testGetCube_jedenPoziom() {
-        listaPoziomow = new ArrayList<>();
-        listaPoziomow.add(poziom[7]);
-        budynek = new Budynek(0, "Budynek z jednym poziomem", listaPoziomow);
-
-        assertEquals(290, budynek.getCube(), 0);
-    }
-
-    /**
-     * Check if the value returned by the method getCube in class Budynek
-     * is correct when the list of the class Poziom is set, which contains many objects;
-     */
-    @Test
-    public void testGetCube_wielePoziomow() {
-        listaPoziomow = new ArrayList<>();
-        listaPoziomow.add(poziom[2]);
-        listaPoziomow.add(poziom[5]);
-        listaPoziomow.add(poziom[8]);
-        budynek = new Budynek(0, "Budynek z wieloma poziomami", listaPoziomow);
-
-        assertEquals(190, budynek.getCube(), 0);
+        listaPoziomow.add(mockPoziom[1]);
+        budynek.setListaPoziomow(listaPoziomow);
+        assertEquals(60, budynek.getCube(), 1400);  //test z wieloma poziomami
+        verify(mockPoziom[0], times(2)).getCube();
+        verify(mockPoziom[1]).getCube();
     }
 
     /**
      * Check if the value returned by the method getLight in class Budynek
-     * is correct when the empty list of the class Poziom is set.
+     * is correct when the various list of the class Poziom is set.
      */
     @Test
-    public void testGetLight_brakPoziomow() {
-        listaPoziomow = new ArrayList<>();
-        budynek = new Budynek(0, "Pusty budynek", listaPoziomow);
+    public void testGetLight() {
+        Poziom mockPoziom[] = new Poziom[2];
+        for(int i = 0; i < 2; i++) {
+            mockPoziom[i] = mock(Poziom.class);
+            when(mockPoziom[i].getLight()).thenReturn(180.0 + (i + 1) * 20);
+        }
 
-        assertEquals(0, budynek.getLight(), 0);
+        listaPoziomow = new ArrayList<>();
+        budynek = new Budynek(0, "Budynek testujący metode getLight()", listaPoziomow);
+        assertEquals(0, budynek.getLight(), 0);   //test bez poziomow
+
+        listaPoziomow.add(mockPoziom[0]);
+        budynek.setListaPoziomow(listaPoziomow);
+        assertEquals(10, budynek.getLight(), 400);  //test z jednym poziomem
+        verify(mockPoziom[0]).getLight();
+
+        listaPoziomow.add(mockPoziom[1]);
+        budynek.setListaPoziomow(listaPoziomow);
+        assertEquals(60, budynek.getLight(), 1400);  //test z wieloma poziomami
+        verify(mockPoziom[0], times(2)).getLight();
+        verify(mockPoziom[1]).getLight();
     }
 
-    /**
-     * Check if the value returned by the method getLight in class Budynek
-     * is correct when the list of the class Poziom is set, which contains only the one object.
-     */
-    @Test
-    public void testGetLight_jedenPoziom() {
-        listaPoziomow = new ArrayList<>();
-        listaPoziomow.add(poziom[1]);
-        budynek = new Budynek(0, "Budynek z jednym poziomem", listaPoziomow);
-
-        assertEquals(240.0, budynek.getLight(), 0);
-    }
-
-    /**
-     * Check if the value returned by the method getLight in class Budynek
-     * is correct when the list of the class Poziom is set, which contains many objects;
-     */
-    @Test
-    public void testGetLight_wielePoziomow() {
-        listaPoziomow = new ArrayList<>();
-        listaPoziomow.add(poziom[4]);
-        listaPoziomow.add(poziom[7]);
-        listaPoziomow.add(poziom[8]);
-        budynek = new Budynek(0, "Budynek z wieloma poziomami", listaPoziomow);
-
-        assertEquals(750, budynek.getLight(), 0);
-    }
 
     /**
      * Check if the value returned by the method getHeating in class Budynek
